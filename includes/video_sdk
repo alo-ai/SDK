@@ -1,0 +1,135 @@
+<h1 id='video-sdk'>Video SDK</h1><h2 id='video-sdk-overview'>Overview</h2>
+<p>TODO: Add some text here</p>
+<h2 id='video-sdk-prerequisites'>Prerequisites</h2>
+<p>TODO: Add some text here?</p>
+
+<p>TODO: Summary of all available API methods</p>
+<h2 id='video-sdk-handling-events'>Handling Events</h2>
+<blockquote>
+<p>Sample for handling audio events</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">onAloEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">onAloMessage</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> [</span><span class="dl">'</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toLocaleTimeString</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION</span><span class="p">:</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connected</span><span class="dl">"</span><span class="p">);</span>
+
+            <span class="c1">// If we let the SDK pick a user id for us we can get it from this message</span>
+          <span class="nx">userId</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo reconnect pending</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">JOIN_CHANNEL</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Channel join status: </span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_CHANNEL_STATUS</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alo Audio channel status</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">PARTICIPANTS_CHANGED</span><span class="p">:</span>
+      <span class="nx">renderParticipantList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participants</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CURRENT_SPEAKER</span><span class="p">:</span>
+      <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">(no one)</span><span class="dl">'</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">You</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Currently Speaking:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_MUTED_CHANGED</span><span class="p">:</span>
+      <span class="kd">let</span> <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">muteButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">muteButton</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Unmute</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Mute</span><span class="dl">"</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_PUBLISHED_CHANGED</span><span class="p">:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isLocal</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isPublished</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">//document.getElementById('local-video').src = URL.createObjectURL(message.stream);</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-video</span><span class="dl">'</span><span class="p">).</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">mediaStream</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-username</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">video-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Unpublish Video</span><span class="dl">"</span><span class="p">;</span>
+          <span class="nx">isPublished</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-video</span><span class="dl">'</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-username</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">video-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Publish Video</span><span class="dl">"</span><span class="p">;</span>
+          <span class="nx">isPublished</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">!!! onremotestream !!!</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isPublished</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">videoListContainer</span> <span class="o">=</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">published-video-list</span><span class="dl">'</span><span class="p">);</span>
+          <span class="kd">let</span> <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">videoContainer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+            <span class="nx">videoListContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">videoContainer</span><span class="p">);</span>
+          <span class="p">}</span>
+
+          <span class="kd">let</span> <span class="nx">videoTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">videoTag</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">videoTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">video</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`video-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">autoplay</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">playsInline</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">videoTag</span><span class="p">);</span>
+          <span class="p">}</span>
+
+          <span class="c1">//videoTag.src = URL.createObjectURL(message.stream);</span>
+          <span class="nx">videoTag</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">mediaStream</span><span class="p">;</span>
+
+          <span class="kd">let</span> <span class="nx">nameTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`name-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">nameTag</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">nameTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">nameTag</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`name-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">nameTag</span><span class="p">);</span>
+          <span class="p">}</span>
+
+          <span class="kd">let</span> <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">muteButton</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">muteButton</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+            <span class="nx">muteButton</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">handleRemoteVideoMuteToggle</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">);};</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">muteButton</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">participant</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">);</span>
+          <span class="nx">muteButton</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Unmute</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Mute</span><span class="dl">"</span><span class="p">;</span>
+          <span class="nx">nameTag</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// TODO: remove the div</span>
+          <span class="kd">let</span> <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">videoContainer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">videoContainer</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+
+      <span class="p">}</span>
+
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST</span><span class="p">:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span>  <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_VIDEO_INPUT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">populateDeviceList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">devices</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>

@@ -1,0 +1,446 @@
+<h1 id='audio-sdk'>Audio SDK</h1><h2 id='audio-sdk-overview'>Overview</h2>
+<p>TODO: Add some text here</p>
+<h2 id='audio-sdk-prerequisites'>Prerequisites</h2>
+<p>TODO: Add some text here?</p>
+<h3 id='audio-sdk-prerequisites-get-an-api-key'>Get an API Key</h3>
+<p>TODO: Explain how to get the account credentials</p>
+<h3 id='audio-sdk-prerequisites-get-the-javascript-sdk'>Get the Javascript SDK</h3>
+<blockquote>
+<p>Import the SDK</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AloAudio</span><span class="p">,</span> <span class="nx">AloAudioEvents</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">alo-audio-js</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div>
+<p><code>npm install --save alo-audio-js</code></p>
+
+<p>TODO: will we also have a CDN version of the SDK?</p>
+<h2 id='audio-sdk-connecting-to-the-audio-service'>Connecting to the Audio Service</h2>
+<p>In order to instantiate the AloAudio object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
+
+<p><code>aloAudio = new AloAudio(props);</code></p>
+
+<p>To connect to the audio service you call the <code>connect()</code> method:</p>
+
+<p><code>aloAudio.connect();</code></p>
+<h3 id='audio-sdk-connecting-to-the-audio-service-user-object'>User Object</h3>
+<p>TODO: create a User object class (maybe call it Participant instead)</p>
+
+<p>The user object defines the user that will be participating in the audio channels.</p>
+
+<blockquote>
+<p>Sample User Object.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code> <span class="nx">user</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nl">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some unique id</span><span class="dl">"</span><span class="p">,</span>
+   <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some display name for the user</span><span class="dl">"</span><span class="p">,</span>
+   <span class="nx">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some unique id associated with user's current device</span><span class="dl">"</span>
+ <span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td>Unique User identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>No</td>
+<td>Name to be displayed in the list of participants for the current user.  If not provided a name will be generated from the user <code>id</code> and <code>deviceId</code></td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td>No</td>
+<td>Unique device identifier.  If not provided a random id will be generated.</td>
+</tr>
+</tbody></table>
+<h3 id='audio-sdk-connecting-to-the-audio-service-current-channel-object'>Current Channel Object</h3>
+<p>TODO: create a Channel object class</p>
+
+<p>The current channel object defines the audio channel that the user is currently participating in.</p>
+
+<blockquote>
+<p>Sample Current Channel Object.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
+  <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+<tr>
+<td>isIntercom</td>
+<td>No</td>
+<td>false</td>
+<td>If true this is a full duplex channel.  Otherwise it is a PTT channel.  TODO: do we want to use the word &quot;intercom&quot; ?</td>
+</tr>
+<tr>
+<td>bcp47Language</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+<tr>
+<td>bcp47LanguageTag</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+</tbody></table>
+<h3 id='audio-sdk-connecting-to-the-audio-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">audioUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
+      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
+      <span class="na">audioRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
+      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+      <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span><span class="p">,</span>
+      <span class="na">aloEventCallback</span><span class="p">:</span> <span class="nx">handleAudioEvent</span><span class="p">,</span>
+      <span class="na">ttsEnabled</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">};</span>
+    <span class="nx">aloAudio</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloAudio</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">handleAudioEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">ĀLO Audio Message</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>Yes</td>
+<td></td>
+<td>The <a href="#audio-sdk-connecting-to-the-audio-service-user-object">user</a> object that defines the current user</td>
+</tr>
+<tr>
+<td>currentChannel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#audio-sdk-connecting-to-the-audio-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the audio service but will not immediately join a channel.</td>
+</tr>
+<tr>
+<td>aloConnections</td>
+<td>Yes</td>
+<td></td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>aloEventCallback</td>
+<td>No</td>
+<td></td>
+<td>Although technically not required you&#39;ll want to provide a function that handles event messages coming from the audio service.  See <a href="#audio-sdk-handling-events">Handling Events</a></td>
+</tr>
+<tr>
+<td>ttsEnabled</td>
+<td>No</td>
+<td>false</td>
+<td>Set this to true if you want the user to hear TTS audio</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example messages received during the connection process.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CONNECTION"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTING"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
+    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CONNECTION"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
+    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<aside class="notice">
+Once you are connected to the Audio Service you will start receiving message in the function you specified as your <code>aloEventCallback</code>&#46;
+See <a href="#audio-sdk-handling-events">Handling Events</a> for more information on the types of message that may arrive.
+</aside>
+<h2 id='audio-sdk-disconnecting-from-the-audio-service'>Disconnecting from the Audio Service</h2>
+<blockquote>
+<p>Audio Service Disconnect.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+</code></pre></div>
+<p>Invoking the <code>disconnect()</code> method will remove the user from any channel that they are currently participating in.  All connections to the audio service will also be terminated.  You will need to <a href="#audio-sdk-connecting-to-the-audio-service">connect</a> again before attempting to join a channel.</p>
+<h2 id='audio-sdk-join-a-channel'>Join a Channel</h2>
+<p>(NOT YET IMPLEMENTED) but can use changeChannel.  TODO: we should probably change the the changeChannel method name to something that conveys that it means &quot;change or join&quot;</p>
+<h2 id='audio-sdk-change-channel'>Change Channel</h2>
+<blockquote>
+<p>Sample Channel Change.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+</code></pre></div>
+<p>To change the audio channel you invoke the <code>changeChannel()</code> method.</p>
+
+<blockquote>
+<p>Example messages received while joining or changing channels.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"JOIN_CHANNEL"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINING"</span><span class="p">,</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">id:</span><span class="w"> </span><span class="err">'myChannelId'</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"JOIN_CHANNEL"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">id:</span><span class="w"> </span><span class="err">'myChannelId'</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>After joining a room you might also receive events about the availability of the microphone and/or PTT button</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"MIC_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"MIC_STATE_UNAVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"MIC_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"MIC_STATE_AVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE_UNAVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE_AVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='audio-sdk-leave-channel'>Leave Channel</h2>
+<p>(NOT YET IMPLEMENTED)</p>
+<h2 id='audio-sdk-push-to-talk-ptt'>Push To Talk (PTT)</h2>
+<p>TODO: Explain what PTT is - and what &quot;locking (mutex)&quot; means.</p>
+
+<blockquote>
+<p>Example messages received when pressing the PTT button.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_LOCK"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_LOCK_ACQUIRED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CURRENT_SPEAKER"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
+    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"AUDIO_MUTE_CHANGE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"ptt"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">TODO:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"mic"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"ptt"</span><span class="err">.</span><span class="w">  </span><span class="err">We</span><span class="w"> </span><span class="err">should</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">constants</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">values</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example messages received when releasing the PTT button.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_LOCK"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_LOCK_RELEASED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CURRENT_SPEAKER"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"AUDIO_MUTE_CHANGE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"ptt"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">TODO:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"mic"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"ptt"</span><span class="err">.</span><span class="w">  </span><span class="err">We</span><span class="w"> </span><span class="err">should</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">constants</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">values</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='audio-sdk-full-duplex'>Full Duplex</h2>
+<p>TODO: Explain what Full Duplex is.</p>
+<h2 id='audio-sdk-mute-and-unmute-audio'>Mute and Unmute Audio</h2>
+<p>When using full duplex audio you have the ability to mute/unmute your microphone with the <code>startIntercom()</code> and <code>endIntercom()</code> methods.</p>
+
+<p>Before allowing the end user to mute/unmute the microphone you should make sure you have received a <code>MIC_STATE_UNAVAILABLE</code> event.  TODO: link to MIC_STATE_UNAVAILABLE in the Handling Events section of this doc</p>
+
+<blockquote>
+<p>Example messages received muting/unmuting audio.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"AUDIO_MUTE_CHANGE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"mic"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">TODO:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"mic"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"ptt"</span><span class="err">.</span><span class="w">  </span><span class="err">We</span><span class="w"> </span><span class="err">should</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">constants</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">values</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>TODO: start/endIntercom are terrible names. Change to mute/unmuteAudio (or something along those lines)</p>
+<h2 id='audio-sdk-input-device-selection'>Input Device Selection</h2><h2 id='audio-sdk-handling-participants'>Handling Participants</h2>
+<blockquote>
+<p>Example PARTICIPANTS_CHANGED event message</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PARTICIPANTS_CHANGED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">currentParticipantId:</span><span class="w"> </span><span class="s2">"871f35b5-479e-4b99-acba-71ab6fe50768"</span><span class="p">,</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">id:</span><span class="w"> </span><span class="s2">"myChannelId"</span><span class="p">},</span><span class="w">
+  </span><span class="err">participants:</span><span class="w"> </span><span class="err">Array(</span><span class="mi">2</span><span class="err">)</span><span class="w">
+    </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="err">Participant</span><span class="w">
+      </span><span class="err">id:</span><span class="w"> </span><span class="s2">"871f35b5-479e-4b99-acba-71ab6fe50768"</span><span class="w">
+      </span><span class="err">muted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="w">
+      </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"2963"</span><span class="w">
+    </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="err">Participant</span><span class="w">
+      </span><span class="err">id:</span><span class="w"> </span><span class="s2">"fd8aef24-bbb4-48aa-9d7c-f90d1c30d9a5"</span><span class="w">
+      </span><span class="err">muted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Sally Smith"</span><span class="w">
+      </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"6487"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>TODO: Participant should have deviceId if possible</p>
+
+<p>TODO: participant id vs user id is confusing and we need a way to convey the difference (or hide the difference).</p>
+
+<p>TODO: audio sdk should possibly  the same participant id assignment scheme as we use in video sdk</p>
+
+<p>When you join a channel you will receive a `PARTICIPANTS_CHANGED&#39; event message containing a list of participants who are currently in the channel.  While in a given channel you will recieve a similar message each time a participant enters or leaves the channel.</p>
+<h2 id='audio-sdk-text-to-speech-audio'>Text To Speech Audio</h2><h3 id='audio-sdk-text-to-speech-audio-enabling-tts'>Enabling TTS</h3><h3 id='audio-sdk-text-to-speech-audio-specifying-a-tts-language'>Specifying a TTS Language</h3><h2 id='audio-sdk-error-messages'>Error Messages</h2><h2 id='audio-sdk-api'>API</h2>
+<p>TODO: Summary of all available API methods</p>
+<h2 id='audio-sdk-handling-events'>Handling Events</h2>
+<blockquote>
+<p>Sample for handling audio events</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">handleAudioEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">onAloAudioEvent</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1">[</span><span class="dl">'</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toLocaleTimeString</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION</span><span class="p">:</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connected</span><span class="dl">"</span><span class="p">);</span>
+
+          <span class="c1">// If we let the SDK pick a user id for us we can get it from this message</span>
+          <span class="nx">userId</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo reconnect pending</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">JOIN_CHANNEL</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Channel join status: </span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">AUDIO_CHANNEL_STATUS</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alo Audio channel status</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">PARTICIPANTS_CHANGED</span><span class="p">:</span>
+      <span class="nx">renderParticipantList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participants</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CURRENT_SPEAKER</span><span class="p">:</span>
+      <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">(no one)</span><span class="dl">'</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">You</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Currently Speaking:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST</span><span class="p">:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span>  <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_AUDIO_INPUT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">populateDeviceList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">devices</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CURRENT_AUDIO_INPUT_DEVICE</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Audio input device currently in use:</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="s2"> (</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">deviceId</span><span class="p">}</span><span class="s2">)`</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>TODO: Outline all the possible event messages that can be received.</p>
+
+<p>JOIN_CHANNEL: &#39;JOIN_CHANNEL&#39;,</p>
+
+<p>CHANNEL_STATUS_JOINING: &#39;JOINING&#39;,
+    CHANNEL_STATUS_JOINED: &#39;JOINED&#39;,
+    STATUS_FAILED: &#39;FAILED&#39;,
+    STATUS_NOT_CONNECTED: &#39;NOT_CONNECTED&#39;,</p>
+
+<p>CONNECTION: &#39;CONNECTION&#39;,</p>
+
+<p>CONNECTION_STATUS_CONNECTED: &#39;CONNECTED&#39;,
+    CONNECTION_STATUS_DISCONNECTED: &#39;DISCONNECTED&#39;,
+    CONNECTION_STATUS_CONNECTING: &#39;CONNECTING&#39;,
+    CONNECTION_STATUS_ERROR: &#39;ERROR&#39;,
+    CONNECTION_STATUS_RECONNECT_PENDING: &#39;RECONNECT_PENDING&#39;,</p>
+
+<p>CURRENT_SPEAKER: &#39;CURRENT_SPEAKER&#39;,</p>
+
+<p>PARTICIPANTS_CHANGED: &#39;PARTICIPANTS_CHANGED&#39;,</p>
+
+<p>AUDIO_CHANNEL_STATUS: &#39;AUDIO_CHANNEL_STATUS&#39;,</p>
+
+<p>PTT_BUTTON_STATE: &#39;PTT_BUTTON_STATE&#39;,
+    PTT_BUTTON_STATE_AVAILABLE: &#39;PTT_BUTTON_STATE_AVAILABLE&#39;,
+    PTT_BUTTON_STATE_UNAVAILABLE: &#39;PTT_BUTTON_STATE_UNAVAILABLE&#39;,</p>
+
+<p>MIC_STATE: &#39;MIC_STATE&#39;,
+    MIC_STATE_AVAILABLE: &#39;MIC_STATE_AVAILABLE&#39;,
+    MIC_STATE_UNAVAILABLE: &#39;MIC_STATE_UNAVAILABLE&#39;,
+    MIC_STATE_CHANGING_CHANNEL: &#39;MIC_STATE_CHANGING_CHANNEL&#39;,</p>
+
+<p>PTT_LOCK: &#39;PTT_LOCK&#39;,
+    PTT_LOCK_ACQUIRED: &#39;PTT_LOCK_ACQUIRED&#39;,
+    PTT_LOCK_RELEASED: &#39;PTT_LOCK_RELEASED&#39;,</p>
+
+<p>AUDIO_MUTE_CHANGE: &#39;AUDIO_MUTE_CHANGE&#39;,</p>
+
+<p>MEDIA_DEVICE_LIST: &#39;MEDIA_DEVICE_LIST&#39;,
+    MEDIA_DEVICE_LIST_VIDEO_INPUT: &#39;videoinput&#39;,
+    MEDIA_DEVICE_LIST_AUDIO_INPUT: &#39;audioinput&#39;,
+    MEDIA_DEVICE_LIST_AUDIO_OUTPUT: &#39;audiooutput&#39;,</p>

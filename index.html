@@ -1,0 +1,1281 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-e9bde216.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-3eafe035.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#account" class="toc-h1 toc-link" data-title="Account">Account</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#account-authentication-key" class="toc-h2 toc-link" data-title="Authentication Key">Authentication Key</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#chat-sdk" class="toc-h1 toc-link" data-title="Chat SDK">Chat SDK</a>
+          </li>
+          <li>
+            <a href="#presence-sdk" class="toc-h1 toc-link" data-title="Presence SDK">Presence SDK</a>
+          </li>
+          <li>
+            <a href="#audio-sdk" class="toc-h1 toc-link" data-title="Audio SDK">Audio SDK</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#audio-sdk-overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-connecting-to-the-audio-service" class="toc-h2 toc-link" data-title="Connecting to the Audio Service">Connecting to the Audio Service</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-disconnecting-from-the-audio-service" class="toc-h2 toc-link" data-title="Disconnecting from the Audio Service">Disconnecting from the Audio Service</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-join-a-channel" class="toc-h2 toc-link" data-title="Join a Channel">Join a Channel</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-change-channel" class="toc-h2 toc-link" data-title="Change Channel">Change Channel</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-leave-channel" class="toc-h2 toc-link" data-title="Leave Channel">Leave Channel</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-push-to-talk-ptt" class="toc-h2 toc-link" data-title="Push To Talk (PTT)">Push To Talk (PTT)</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-full-duplex" class="toc-h2 toc-link" data-title="Full Duplex">Full Duplex</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-mute-and-unmute-audio" class="toc-h2 toc-link" data-title="Mute and Unmute Audio">Mute and Unmute Audio</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-input-device-selection" class="toc-h2 toc-link" data-title="Input Device Selection">Input Device Selection</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-handling-participants" class="toc-h2 toc-link" data-title="Handling Participants">Handling Participants</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-text-to-speech-audio" class="toc-h2 toc-link" data-title="Text To Speech Audio">Text To Speech Audio</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-error-messages" class="toc-h2 toc-link" data-title="Error Messages">Error Messages</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-api" class="toc-h2 toc-link" data-title="API">API</a>
+                  </li>
+                  <li>
+                    <a href="#audio-sdk-handling-events" class="toc-h2 toc-link" data-title="Handling Events">Handling Events</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#video-sdk" class="toc-h1 toc-link" data-title="Video SDK">Video SDK</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#video-sdk-overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#video-sdk-prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
+                  </li>
+                  <li>
+                    <a href="#video-sdk-handling-events" class="toc-h2 toc-link" data-title="Handling Events">Handling Events</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#kittens-get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                  </li>
+                  <li>
+                    <a href="#kittens-get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                  </li>
+                  <li>
+                    <a href="#kittens-delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Now you can bring AI-enabled push-to-talk, text messaging, and video chat to your app and give users the ability to communicate instantly. The ĀLO SDK also supports task management, presence management, and our developer-first SDK is designed to get you up and running quickly.</p>
+<h1 id='account'>Account</h1>
+<p>TODO: Some text here about how to sign up for a developer account</p>
+<h2 id='account-authentication-key'>Authentication Key</h2>
+<p>TODO: Some text here about to use your API key</p>
+
+<blockquote>
+<p>To authenticate, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//TODO: need some real code here:</span>
+<span class="kd">const</span> <span class="nx">AloAuthentication</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">AloAuthentication</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">AloAuthentication</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;ALO AUTHENTICATION KEY&gt;</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>&lt;ALO AUTHENTICATION KEY&gt;</code> with your AUTHENTICATION key.</p>
+</blockquote>
+
+<p>ĀLO uses AUTHENTICATION keys to allow access ... BLAH, BLAH, BLAH. You can register a new ĀLO AUTHENTICATION key at our <a href="http://alo.ai/dev">developer portal</a>.</p>
+
+<aside class="notice">
+You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION key.
+</aside>
+
+<h1 id='chat-sdk'>Chat SDK</h1>
+
+<h1 id='presence-sdk'>Presence SDK</h1>
+
+<p><h1 id='audio-sdk'>Audio SDK</h1><h2 id='audio-sdk-overview'>Overview</h2>
+<p>TODO: Add some text here</p>
+<h2 id='audio-sdk-prerequisites'>Prerequisites</h2>
+<p>TODO: Add some text here?</p>
+<h3 id='audio-sdk-prerequisites-get-an-api-key'>Get an API Key</h3>
+<p>TODO: Explain how to get the account credentials</p>
+<h3 id='audio-sdk-prerequisites-get-the-javascript-sdk'>Get the Javascript SDK</h3>
+<blockquote>
+<p>Import the SDK</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AloAudio</span><span class="p">,</span> <span class="nx">AloAudioEvents</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">&quot;</span><span class="s2">alo-audio-js</span><span class="dl">&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p><code>npm install --save alo-audio-js</code></p></p>
+
+<p>TODO: will we also have a CDN version of the SDK?</p>
+
+<h2 id='audio-sdk-connecting-to-the-audio-service'>Connecting to the Audio Service</h2>
+
+<p>In order to instantiate the AloAudio object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
+
+<p><code>aloAudio = new AloAudio(props);</code></p>
+
+<p>To connect to the audio service you call the <code>connect()</code> method:</p>
+
+<p><code>aloAudio.connect();</code></p>
+
+<h3 id='audio-sdk-connecting-to-the-audio-service-user-object'>User Object</h3>
+
+<p>TODO: create a User object class (maybe call it Participant instead)</p>
+
+<p>The user object defines the user that will be participating in the audio channels.</p>
+
+<blockquote>
+<p>Sample User Object.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code> <span class="nx">user</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nl">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some unique id</span><span class="dl">"</span><span class="p">,</span>
+   <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some display name for the user</span><span class="dl">"</span><span class="p">,</span>
+   <span class="nx">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some unique id associated with user's current device</span><span class="dl">"</span>
+ <span class="p">}</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td>Unique User identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>No</td>
+<td>Name to be displayed in the list of participants for the current user.  If not provided a name will be generated from the user <code>id</code> and <code>deviceId</code></td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td>No</td>
+<td>Unique device identifier.  If not provided a random id will be generated.</td>
+</tr>
+</tbody></table>
+
+<h3 id='audio-sdk-connecting-to-the-audio-service-current-channel-object'>Current Channel Object</h3>
+
+<p>TODO: create a Channel object class</p>
+
+<p>The current channel object defines the audio channel that the user is currently participating in.</p>
+
+<blockquote>
+<p>Sample Current Channel Object.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
+  <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+<tr>
+<td>isIntercom</td>
+<td>No</td>
+<td>false</td>
+<td>If true this is a full duplex channel.  Otherwise it is a PTT channel.  TODO: do we want to use the word &quot;intercom&quot; ?</td>
+</tr>
+<tr>
+<td>bcp47Language</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+<tr>
+<td>bcp47LanguageTag</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+</tbody></table>
+
+<p><h3 id='audio-sdk-connecting-to-the-audio-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">&#39;</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">&#39;</span><span class="p">,</span>
+      <span class="na">audioUrl</span><span class="p">:</span> <span class="dl">&#39;</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">&#39;</span><span class="p">,</span>
+      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
+      <span class="na">audioRESTUrl</span><span class="p">:</span> <span class="dl">&#39;</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">&#39;</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">12345</span><span class="dl">&quot;</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">James Jones</span><span class="dl">&quot;</span><span class="p">,</span>
+      <span class="na">deviceId</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">&quot;</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">myChannelId</span><span class="dl">&quot;</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
+      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+      <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span><span class="p">,</span>
+      <span class="na">aloEventCallback</span><span class="p">:</span> <span class="nx">handleAudioEvent</span><span class="p">,</span>
+      <span class="na">ttsEnabled</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">};</span>
+    <span class="nx">aloAudio</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloAudio</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">handleAudioEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">&quot;</span><span class="s2">ĀLO Audio Message</span><span class="dl">&quot;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>Yes</td>
+<td></td>
+<td>The <a href="#audio-sdk-connecting-to-the-audio-service-user-object">user</a> object that defines the current user</td>
+</tr>
+<tr>
+<td>currentChannel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#audio-sdk-connecting-to-the-audio-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the audio service but will not immediately join a channel.</td>
+</tr>
+<tr>
+<td>aloConnections</td>
+<td>Yes</td>
+<td></td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>aloEventCallback</td>
+<td>No</td>
+<td></td>
+<td>Although technically not required you&#39;ll want to provide a function that handles event messages coming from the audio service.  See <a href="#audio-sdk-handling-events">Handling Events</a></td>
+</tr>
+<tr>
+<td>ttsEnabled</td>
+<td>No</td>
+<td>false</td>
+<td>Set this to true if you want the user to hear TTS audio</td>
+</tr>
+</tbody></table></p>
+
+<blockquote>
+<p>Example messages received during the connection process.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CONNECTION"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTING"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
+    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CONNECTION"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
+    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<aside class="notice">
+Once you are connected to the Audio Service you will start receiving message in the function you specified as your <code>aloEventCallback</code>&#46;
+See <a href="#audio-sdk-handling-events">Handling Events</a> for more information on the types of message that may arrive.
+</aside>
+
+<h2 id='audio-sdk-disconnecting-from-the-audio-service'>Disconnecting from the Audio Service</h2>
+
+<blockquote>
+<p>Audio Service Disconnect.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+</code></pre></div>
+
+<p>Invoking the <code>disconnect()</code> method will remove the user from any channel that they are currently participating in.  All connections to the audio service will also be terminated.  You will need to <a href="#audio-sdk-connecting-to-the-audio-service">connect</a> again before attempting to join a channel.</p>
+
+<h2 id='audio-sdk-join-a-channel'>Join a Channel</h2>
+
+<p>(NOT YET IMPLEMENTED) but can use changeChannel.  TODO: we should probably change the the changeChannel method name to something that conveys that it means &quot;change or join&quot;</p>
+
+<h2 id='audio-sdk-change-channel'>Change Channel</h2>
+
+<blockquote>
+<p>Sample Channel Change.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+</code></pre></div>
+
+<p>To change the audio channel you invoke the <code>changeChannel()</code> method.</p>
+
+<blockquote>
+<p>Example messages received while joining or changing channels.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"JOIN_CHANNEL"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINING"</span><span class="p">,</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">id:</span><span class="w"> </span><span class="err">'myChannelId'</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"JOIN_CHANNEL"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">id:</span><span class="w"> </span><span class="err">'myChannelId'</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<blockquote>
+<p>After joining a room you might also receive events about the availability of the microphone and/or PTT button</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"MIC_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"MIC_STATE_UNAVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"MIC_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"MIC_STATE_AVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE_UNAVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE_AVAILABLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='audio-sdk-leave-channel'>Leave Channel</h2>
+<p>(NOT YET IMPLEMENTED)</p>
+<h2 id='audio-sdk-push-to-talk-ptt'>Push To Talk (PTT)</h2>
+<p>TODO: Explain what PTT is - and what &quot;locking (mutex)&quot; means.</p>
+
+<blockquote>
+<p>Example messages received when pressing the PTT button.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_LOCK"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_LOCK_ACQUIRED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CURRENT_SPEAKER"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
+    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"AUDIO_MUTE_CHANGE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"ptt"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">TODO:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"mic"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"ptt"</span><span class="err">.</span><span class="w">  </span><span class="err">We</span><span class="w"> </span><span class="err">should</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">constants</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">values</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<blockquote>
+<p>Example messages received when releasing the PTT button.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PTT_LOCK"</span><span class="p">,</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_LOCK_RELEASED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CURRENT_SPEAKER"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"AUDIO_MUTE_CHANGE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"ptt"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">TODO:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"mic"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"ptt"</span><span class="err">.</span><span class="w">  </span><span class="err">We</span><span class="w"> </span><span class="err">should</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">constants</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">values</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='audio-sdk-full-duplex'>Full Duplex</h2>
+<p>TODO: Explain what Full Duplex is.</p>
+<h2 id='audio-sdk-mute-and-unmute-audio'>Mute and Unmute Audio</h2>
+<p>When using full duplex audio you have the ability to mute/unmute your microphone with the <code>startIntercom()</code> and <code>endIntercom()</code> methods.</p>
+
+<p>Before allowing the end user to mute/unmute the microphone you should make sure you have received a <code>MIC_STATE_UNAVAILABLE</code> event.  TODO: link to MIC_STATE_UNAVAILABLE in the Handling Events section of this doc</p>
+
+<blockquote>
+<p>Example messages received muting/unmuting audio.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"AUDIO_MUTE_CHANGE"</span><span class="p">,</span><span class="w">
+  </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"mic"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">TODO:</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="s2">"mic"</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"ptt"</span><span class="err">.</span><span class="w">  </span><span class="err">We</span><span class="w"> </span><span class="err">should</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">constants</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">values</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>TODO: start/endIntercom are terrible names. Change to mute/unmuteAudio (or something along those lines)</p>
+
+<h2 id='audio-sdk-input-device-selection'>Input Device Selection</h2><h2 id='audio-sdk-handling-participants'>Handling Participants</h2>
+
+<blockquote>
+<p>Example PARTICIPANTS_CHANGED event message</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="err">event:</span><span class="w"> </span><span class="s2">"PARTICIPANTS_CHANGED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">currentParticipantId:</span><span class="w"> </span><span class="s2">"871f35b5-479e-4b99-acba-71ab6fe50768"</span><span class="p">,</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">id:</span><span class="w"> </span><span class="s2">"myChannelId"</span><span class="p">},</span><span class="w">
+  </span><span class="err">participants:</span><span class="w"> </span><span class="err">Array(</span><span class="mi">2</span><span class="err">)</span><span class="w">
+    </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="err">Participant</span><span class="w">
+      </span><span class="err">id:</span><span class="w"> </span><span class="s2">"871f35b5-479e-4b99-acba-71ab6fe50768"</span><span class="w">
+      </span><span class="err">muted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="w">
+      </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"2963"</span><span class="w">
+    </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="err">Participant</span><span class="w">
+      </span><span class="err">id:</span><span class="w"> </span><span class="s2">"fd8aef24-bbb4-48aa-9d7c-f90d1c30d9a5"</span><span class="w">
+      </span><span class="err">muted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Sally Smith"</span><span class="w">
+      </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"6487"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>TODO: Participant should have deviceId if possible</p>
+
+<p>TODO: participant id vs user id is confusing and we need a way to convey the difference (or hide the difference).</p>
+
+<p>TODO: audio sdk should possibly  the same participant id assignment scheme as we use in video sdk</p>
+
+<p>When you join a channel you will receive a `PARTICIPANTS_CHANGED&#39; event message containing a list of participants who are currently in the channel.  While in a given channel you will recieve a similar message each time a participant enters or leaves the channel.</p>
+
+<h2 id='audio-sdk-text-to-speech-audio'>Text To Speech Audio</h2><h3 id='audio-sdk-text-to-speech-audio-enabling-tts'>Enabling TTS</h3><h3 id='audio-sdk-text-to-speech-audio-specifying-a-tts-language'>Specifying a TTS Language</h3><h2 id='audio-sdk-error-messages'>Error Messages</h2><h2 id='audio-sdk-api'>API</h2>
+
+<p>TODO: Summary of all available API methods</p>
+
+<h2 id='audio-sdk-handling-events'>Handling Events</h2>
+
+<blockquote>
+<p>Sample for handling audio events</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">handleAudioEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">onAloAudioEvent</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1">[</span><span class="dl">'</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toLocaleTimeString</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION</span><span class="p">:</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connected</span><span class="dl">"</span><span class="p">);</span>
+
+          <span class="c1">// If we let the SDK pick a user id for us we can get it from this message</span>
+          <span class="nx">userId</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo reconnect pending</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">JOIN_CHANNEL</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Channel join status: </span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">AUDIO_CHANNEL_STATUS</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alo Audio channel status</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">PARTICIPANTS_CHANGED</span><span class="p">:</span>
+      <span class="nx">renderParticipantList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participants</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CURRENT_SPEAKER</span><span class="p">:</span>
+      <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">(no one)</span><span class="dl">'</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">You</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Currently Speaking:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST</span><span class="p">:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span>  <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_AUDIO_INPUT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">populateDeviceList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">devices</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloAudioEvents</span><span class="p">.</span><span class="nx">CURRENT_AUDIO_INPUT_DEVICE</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Audio input device currently in use:</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="s2"> (</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">deviceId</span><span class="p">}</span><span class="s2">)`</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>TODO: Outline all the possible event messages that can be received.</p>
+
+<p>JOIN_CHANNEL: &#39;JOIN_CHANNEL&#39;,</p>
+
+<p>CHANNEL_STATUS_JOINING: &#39;JOINING&#39;,
+    CHANNEL_STATUS_JOINED: &#39;JOINED&#39;,
+    STATUS_FAILED: &#39;FAILED&#39;,
+    STATUS_NOT_CONNECTED: &#39;NOT_CONNECTED&#39;,</p>
+
+<p>CONNECTION: &#39;CONNECTION&#39;,</p>
+
+<p>CONNECTION_STATUS_CONNECTED: &#39;CONNECTED&#39;,
+    CONNECTION_STATUS_DISCONNECTED: &#39;DISCONNECTED&#39;,
+    CONNECTION_STATUS_CONNECTING: &#39;CONNECTING&#39;,
+    CONNECTION_STATUS_ERROR: &#39;ERROR&#39;,
+    CONNECTION_STATUS_RECONNECT_PENDING: &#39;RECONNECT_PENDING&#39;,</p>
+
+<p>CURRENT_SPEAKER: &#39;CURRENT_SPEAKER&#39;,</p>
+
+<p>PARTICIPANTS_CHANGED: &#39;PARTICIPANTS_CHANGED&#39;,</p>
+
+<p>AUDIO_CHANNEL_STATUS: &#39;AUDIO_CHANNEL_STATUS&#39;,</p>
+
+<p>PTT_BUTTON_STATE: &#39;PTT_BUTTON_STATE&#39;,
+    PTT_BUTTON_STATE_AVAILABLE: &#39;PTT_BUTTON_STATE_AVAILABLE&#39;,
+    PTT_BUTTON_STATE_UNAVAILABLE: &#39;PTT_BUTTON_STATE_UNAVAILABLE&#39;,</p>
+
+<p>MIC_STATE: &#39;MIC_STATE&#39;,
+    MIC_STATE_AVAILABLE: &#39;MIC_STATE_AVAILABLE&#39;,
+    MIC_STATE_UNAVAILABLE: &#39;MIC_STATE_UNAVAILABLE&#39;,
+    MIC_STATE_CHANGING_CHANNEL: &#39;MIC_STATE_CHANGING_CHANNEL&#39;,</p>
+
+<p>PTT_LOCK: &#39;PTT_LOCK&#39;,
+    PTT_LOCK_ACQUIRED: &#39;PTT_LOCK_ACQUIRED&#39;,
+    PTT_LOCK_RELEASED: &#39;PTT_LOCK_RELEASED&#39;,</p>
+
+<p>AUDIO_MUTE_CHANGE: &#39;AUDIO_MUTE_CHANGE&#39;,</p>
+
+<p>MEDIA_DEVICE_LIST: &#39;MEDIA_DEVICE_LIST&#39;,
+    MEDIA_DEVICE_LIST_VIDEO_INPUT: &#39;videoinput&#39;,
+    MEDIA_DEVICE_LIST_AUDIO_INPUT: &#39;audioinput&#39;,
+    MEDIA_DEVICE_LIST_AUDIO_OUTPUT: &#39;audiooutput&#39;,</p>
+
+<p><h1 id='video-sdk'>Video SDK</h1><h2 id='video-sdk-overview'>Overview</h2>
+<p>TODO: Add some text here</p>
+<h2 id='video-sdk-prerequisites'>Prerequisites</h2>
+<p>TODO: Add some text here?</p></p>
+
+<p>TODO: Summary of all available API methods</p>
+
+<h2 id='video-sdk-handling-events'>Handling Events</h2>
+
+<blockquote>
+<p>Sample for handling audio events</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">onAloEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">onAloMessage</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> [</span><span class="dl">'</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toLocaleTimeString</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION</span><span class="p">:</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connected</span><span class="dl">"</span><span class="p">);</span>
+
+            <span class="c1">// If we let the SDK pick a user id for us we can get it from this message</span>
+          <span class="nx">userId</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo reconnect pending</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">JOIN_CHANNEL</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Channel join status: </span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_CHANNEL_STATUS</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alo Audio channel status</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">PARTICIPANTS_CHANGED</span><span class="p">:</span>
+      <span class="nx">renderParticipantList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participants</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CURRENT_SPEAKER</span><span class="p">:</span>
+      <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">(no one)</span><span class="dl">'</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">You</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">name</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Currently Speaking:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_MUTED_CHANGED</span><span class="p">:</span>
+      <span class="kd">let</span> <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">muteButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">muteButton</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Unmute</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Mute</span><span class="dl">"</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_PUBLISHED_CHANGED</span><span class="p">:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isLocal</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isPublished</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">//document.getElementById('local-video').src = URL.createObjectURL(message.stream);</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-video</span><span class="dl">'</span><span class="p">).</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">mediaStream</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-username</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">video-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Unpublish Video</span><span class="dl">"</span><span class="p">;</span>
+          <span class="nx">isPublished</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-video</span><span class="dl">'</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-username</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">video-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Publish Video</span><span class="dl">"</span><span class="p">;</span>
+          <span class="nx">isPublished</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">!!! onremotestream !!!</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isPublished</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">videoListContainer</span> <span class="o">=</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">published-video-list</span><span class="dl">'</span><span class="p">);</span>
+          <span class="kd">let</span> <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">videoContainer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+            <span class="nx">videoListContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">videoContainer</span><span class="p">);</span>
+          <span class="p">}</span>
+
+          <span class="kd">let</span> <span class="nx">videoTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">videoTag</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">videoTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">video</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`video-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">autoplay</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">playsInline</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">videoTag</span><span class="p">);</span>
+          <span class="p">}</span>
+
+          <span class="c1">//videoTag.src = URL.createObjectURL(message.stream);</span>
+          <span class="nx">videoTag</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">mediaStream</span><span class="p">;</span>
+
+          <span class="kd">let</span> <span class="nx">nameTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`name-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">nameTag</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">nameTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">nameTag</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`name-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">nameTag</span><span class="p">);</span>
+          <span class="p">}</span>
+
+          <span class="kd">let</span> <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">muteButton</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">muteButton</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+            <span class="nx">muteButton</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">handleRemoteVideoMuteToggle</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">);};</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">muteButton</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">participant</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">);</span>
+          <span class="nx">muteButton</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Unmute</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Mute</span><span class="dl">"</span><span class="p">;</span>
+          <span class="nx">nameTag</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// TODO: remove the div</span>
+          <span class="kd">let</span> <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">videoContainer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">videoContainer</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+
+      <span class="p">}</span>
+
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST</span><span class="p">:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span>  <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_VIDEO_INPUT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">populateDeviceList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">devices</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id='kittens'>Kittens</h1><h2 id='kittens-get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves all kittens.</p>
+<h3 id='kittens-get-all-kittens-http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/api/kittens</code></p>
+<h3 id='kittens-get-all-kittens-query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include_cats</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+<tr>
+<td>available</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+<h2 id='kittens-get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a specific kitten.</p>
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id='kittens-get-a-specific-kitten-http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='kittens-get-a-specific-kitten-url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to retrieve</td>
+</tr>
+</tbody></table>
+<h2 id='kittens-delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  <span class="nt">-X</span> DELETE
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint deletes a specific kitten.</p>
+<h3 id='kittens-delete-a-specific-kitten-http-request'>HTTP Request</h3>
+<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='kittens-delete-a-specific-kitten-url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to delete</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
