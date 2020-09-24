@@ -2,134 +2,421 @@
 <p>TODO: Add some text here</p>
 <h2 id='video-sdk-prerequisites'>Prerequisites</h2>
 <p>TODO: Add some text here?</p>
-
-<p>TODO: Summary of all available API methods</p>
-<h2 id='video-sdk-handling-events'>Handling Events</h2>
+<h3 id='video-sdk-prerequisites-get-an-api-key'>Get an API Key</h3>
+<p>TODO: Explain how to get the account credentials</p>
+<h3 id='video-sdk-prerequisites-get-the-javascript-sdk'>Get the Javascript SDK</h3>
 <blockquote>
-<p>Sample for handling audio events</p>
+<p>Import the SDK</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">onAloEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">onAloMessage</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> [</span><span class="dl">'</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toLocaleTimeString</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">]</span><span class="dl">'</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">import</span> <span class="nx">AloVideo</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">alo-video-js</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div>
+<p><code>npm install --save alo-video-js</code></p>
 
-  <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION</span><span class="p">:</span>
-      <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connected</span><span class="dl">"</span><span class="p">);</span>
+<p>TODO: will we also have a CDN version of the SDK?</p>
+<h2 id='video-sdk-connecting-to-the-video-service'>Connecting to the Video Service</h2>
+<p>In order to instantiate the AloVideo object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
 
-            <span class="c1">// If we let the SDK pick a user id for us we can get it from this message</span>
-          <span class="nx">userId</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
-          <span class="k">break</span><span class="p">;</span>
-        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo disconnected</span><span class="dl">"</span><span class="p">);</span>
-          <span class="k">break</span><span class="p">;</span>
-        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo connecting</span><span class="dl">"</span><span class="p">);</span>
-          <span class="k">break</span><span class="p">;</span>
-        <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alo reconnect pending</span><span class="dl">"</span><span class="p">);</span>
-          <span class="k">break</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">JOIN_CHANNEL</span><span class="p">:</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Channel join status: </span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_CHANNEL_STATUS</span><span class="p">:</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alo Audio channel status</span><span class="dl">'</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">PARTICIPANTS_CHANGED</span><span class="p">:</span>
-      <span class="nx">renderParticipantList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participants</span><span class="p">);</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">CURRENT_SPEAKER</span><span class="p">:</span>
-      <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">(no one)</span><span class="dl">'</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">You</span><span class="dl">'</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="nx">name</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Currently Speaking:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_MUTED_CHANGED</span><span class="p">:</span>
-      <span class="kd">let</span> <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">muteButton</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">muteButton</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Unmute</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Mute</span><span class="dl">"</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="k">break</span><span class="p">;</span>
+<p><code>aloVideo = new AloVideo(props);</code></p>
 
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">VIDEO_PUBLISHED_CHANGED</span><span class="p">:</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isLocal</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isPublished</span><span class="p">)</span> <span class="p">{</span>
-          <span class="c1">//document.getElementById('local-video').src = URL.createObjectURL(message.stream);</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-video</span><span class="dl">'</span><span class="p">).</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">mediaStream</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-username</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">video-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Unpublish Video</span><span class="dl">"</span><span class="p">;</span>
-          <span class="nx">isPublished</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-video</span><span class="dl">'</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">local-username</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">video-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Publish Video</span><span class="dl">"</span><span class="p">;</span>
-          <span class="nx">isPublished</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">!!! onremotestream !!!</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">isPublished</span><span class="p">)</span> <span class="p">{</span>
-          <span class="kd">let</span> <span class="nx">videoListContainer</span> <span class="o">=</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">published-video-list</span><span class="dl">'</span><span class="p">);</span>
-          <span class="kd">let</span> <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<p>To connect to the video service you call the <code>connect()</code> method:</p>
 
-          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">videoContainer</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
-            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
-            <span class="nx">videoListContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">videoContainer</span><span class="p">);</span>
-          <span class="p">}</span>
+<p><code>aloVideo.connect();</code></p>
+<h3 id='video-sdk-connecting-to-the-video-service-user-object'>User Object</h3>
+<p>TODO: create a User object class (maybe call it Participant instead)</p>
 
-          <span class="kd">let</span> <span class="nx">videoTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">videoTag</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">videoTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">video</span><span class="dl">"</span><span class="p">);</span>
-            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`video-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
-            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">autoplay</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="nx">videoTag</span><span class="p">.</span><span class="nx">playsInline</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">videoTag</span><span class="p">);</span>
-          <span class="p">}</span>
+<p>The user object defines the user that will be participating in the video channels.</p>
 
-          <span class="c1">//videoTag.src = URL.createObjectURL(message.stream);</span>
-          <span class="nx">videoTag</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">mediaStream</span><span class="p">;</span>
+<blockquote>
+<p>Sample User Object.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code> <span class="nx">user</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nl">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some unique id</span><span class="dl">"</span><span class="p">,</span>
+   <span class="nx">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some display name for the user</span><span class="dl">"</span><span class="p">,</span>
+   <span class="nx">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Some unique id associated with user's current device</span><span class="dl">"</span>
+ <span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td>Unique User identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>No</td>
+<td>Name to be displayed in the list of participants for the current user.  If not provided a name will be generated from the user <code>id</code> and <code>deviceId</code></td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td>No</td>
+<td>Unique device identifier.  If not provided a random id will be generated.</td>
+</tr>
+</tbody></table>
+<h3 id='video-sdk-connecting-to-the-video-service-current-channel-object'>Current Channel Object</h3>
+<p>TODO: create a Channel object class</p>
 
-          <span class="kd">let</span> <span class="nx">nameTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`name-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">nameTag</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">nameTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
-            <span class="nx">nameTag</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`name-tag-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
-            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">nameTag</span><span class="p">);</span>
-          <span class="p">}</span>
+<p>The current channel object defines the video channel that the user is currently participating in.</p>
 
-          <span class="kd">let</span> <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">muteButton</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">muteButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span><span class="p">);</span>
-            <span class="nx">muteButton</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`mute-button-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
-            <span class="nx">muteButton</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">handleRemoteVideoMuteToggle</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">);};</span>
-            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">muteButton</span><span class="p">);</span>
-          <span class="p">}</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">participant</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">);</span>
-          <span class="nx">muteButton</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">muted</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Unmute</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Mute</span><span class="dl">"</span><span class="p">;</span>
-          <span class="nx">nameTag</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="c1">// TODO: remove the div</span>
-          <span class="kd">let</span> <span class="nx">videoContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">`video-container-</span><span class="p">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">participant</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-          <span class="k">if</span> <span class="p">(</span><span class="nx">videoContainer</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">videoContainer</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">videoContainer</span><span class="p">);</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-
-      <span class="p">}</span>
-
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST</span><span class="p">:</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span>  <span class="nx">AloEvents</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_VIDEO_INPUT</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">populateDeviceList</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">devices</span><span class="p">);</span>
-      <span class="p">}</span>
-      <span class="k">break</span><span class="p">;</span>
-  <span class="p">}</span>
+<blockquote>
+<p>Sample Current Channel Object.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
 <span class="p">}</span>
 </code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+</tbody></table>
+<h3 id='video-sdk-connecting-to-the-video-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToVideo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">videoUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
+      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
+      <span class="na">videoRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
+    <span class="p">};</span>
+    <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
+      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+      <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span>
+    <span class="p">};</span>
+    <span class="nx">aloVideo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloVideo</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+    <span class="nx">initializeEventListeners</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">initializeEventListeners</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onDisconnect</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onDisconnect:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+    <span class="p">})</span>
+
+    <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onConnectionChange</span><span class="dl">'</span><span class="p">,</span> <span class="nx">action</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onConnectionChange:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="na">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo video connected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="na">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo video disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="na">CONNECTION_STATUS_ERROR</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo video connection error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="na">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo video connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="na">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo video reconnect pending.  Retrying in </span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">pendingRestartSeconds</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+
+    <span class="p">}));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>Yes</td>
+<td></td>
+<td>The <a href="#video-sdk-connecting-to-the-video-service-user-object">user</a> object that defines the current user</td>
+</tr>
+<tr>
+<td>currentChannel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#video-sdk-connecting-to-the-video-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the video service but will not immediately join a channel.</td>
+</tr>
+<tr>
+<td>aloConnections</td>
+<td>Yes</td>
+<td></td>
+<td>TBD</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example onConnectionChange event payloads</p>
+</blockquote>
+
+<p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTED&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;DISCONNECTED&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;RECONNECT_PENDING&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Video Server Reconnect Pending&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">pendingRestartSeconds:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="err">retryCount:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='audio-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onConnectionChange</td>
+<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+</tr>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table></p>
+
+<aside class="notice">
+After you call the <code>connect()</code> method the Video Service will start dispatching events that you should add event listeners for&#46;
+See <a href="#video-sdk-handling-events">Handling Events</a> for more information about the types of events that are available.
+</aside>
+<h2 id='video-sdk-disconnecting-from-the-video-service'>Disconnecting from the Video Service</h2>
+<blockquote>
+<p>Video Service Disconnect.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+</code></pre></div>
+<p>Invoking the <code>disconnect()</code> method will remove the user from any channel that they are currently participating in.  All connections to the video service will also be terminated.  You will need to <a href="#video-sdk-connecting-to-the-video-service">connect</a> again before attempting to join a channel.</p>
+
+<blockquote>
+<p>Example onDisconnect event payloads</p>
+</blockquote>
+
+<p><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">when</span><span class="w"> </span><span class="err">disconnect()</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">called</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;DISCONNECTED&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="err">//</span><span class="w"> </span><span class="err">When</span><span class="w"> </span><span class="err">disconnected</span><span class="w"> </span><span class="err">unexpectedly</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='audio-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table></p>
+<h2 id='video-sdk-change-channel'>Change Channel</h2>
+<blockquote>
+<p>Sample Channel Change.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+</code></pre></div>
+<p>To change the audio channel you invoke the <code>changeChannel()</code> method.</p>
+
+<blockquote>
+<p>Example onJoinChannel event payloads</p>
+</blockquote>
+
+<p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;JOINING&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;JOINED&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;JOINING&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Something went wrong&quot;</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='audio-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onJoinChannel</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CHANNEL_STATUS_JOINING, AloAudio.CHANNEL_STATUS_JOINED, AloAudio.STATUS_FAILED.</td>
+</tr>
+</tbody></table></p>
+<h2 id='video-sdk-input-device-selection'>Input Device Selection</h2><h2 id='video-sdk-publishing-video'>Publishing Video</h2><h2 id='video-sdk-participants'>Participants</h2><h2 id='video-sdk-handling-remote-video-streams'>Handling Remote Video Streams</h2><h2 id='video-sdk-muting-unmuting-remote-video-streams'>Muting/Unmuting Remote Video Streams</h2><h2 id='video-sdk-recording-video'>Recording Video</h2><h2 id='video-sdk-automatic-reconnects'>Automatic Reconnects</h2>
+<p>By default the Audio SDK will automatically try to reconnect if there is any sort of connection issue.</p>
+
+<p>TODO: explain how reconnects work
+TODO: explain the option to turn off auto reconnects</p>
+<h2 id='video-sdk-error-messages'>Error Messages</h2><h2 id='video-sdk-api'>API</h2><h2 id='video-sdk-handling-events'>Handling Events</h2>
+<p>In order to listen for AloVideo events you need to add event listeners to the AloVideo.events object.  For example:</p>
+
+<p><code>
+aloVideo.events.addEventListener(&#39;onDisconnect&#39;, event =&gt; {
+      console.log(&quot;onDisconnect:&quot;, event.detail);
+})
+</code></p>
+
+<aside class="notice">
+The event object may contain additional information about the event in <code>event.detail</code>
+</aside>
+
+<blockquote>
+<p>Sample for handling video events</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onDisconnect</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onDisconnect:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>TODO: Outline all the possible event messages that can be received.</p>
+
+<blockquote>
+<p>Example onConnectionChange event payloads</p>
+</blockquote>
+
+<p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTED&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;DISCONNECTED&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;RECONNECT_PENDING&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Video Server Reconnect Pending&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">pendingRestartSeconds:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="err">retryCount:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='audio-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onConnectionChange</td>
+<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+</tr>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table></p>
+
+<blockquote>
+<p>Example onDisconnect event payloads</p>
+</blockquote>
+
+<p><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">when</span><span class="w"> </span><span class="err">disconnect()</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">called</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;DISCONNECTED&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="err">//</span><span class="w"> </span><span class="err">When</span><span class="w"> </span><span class="err">disconnected</span><span class="w"> </span><span class="err">unexpectedly</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='audio-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table></p>

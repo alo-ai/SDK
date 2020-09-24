@@ -67,7 +67,7 @@
 <p>Sample Current Channel Object.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span><span class="p">,</span>
   <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 </code></pre></div>
