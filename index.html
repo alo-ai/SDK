@@ -454,7 +454,7 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 <blockquote>
 <p>Import the SDK</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AloAudio</span><span class="p">,</span> <span class="nx">AloAudioEvents</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">&quot;</span><span class="s2">alo-audio-js</span><span class="dl">&quot;</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">import</span> <span class="nx">AloAudio</span> <span class="k">from</span> <span class="dl">&quot;</span><span class="s2">alo-audio-js</span><span class="dl">&quot;</span><span class="p">;</span>
 </code></pre></div>
 <p><code>npm install --save alo-audio-js</code></p></p>
 
@@ -561,33 +561,58 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 </tr>
 </tbody></table>
 
-<p><h3 id='audio-sdk-connecting-to-the-audio-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
+<h3 id='audio-sdk-connecting-to-the-audio-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">&#39;</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">&#39;</span><span class="p">,</span>
-      <span class="na">audioUrl</span><span class="p">:</span> <span class="dl">&#39;</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">&#39;</span><span class="p">,</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">audioUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
       <span class="c1">// TODO: need a better name for this URL to get the user token</span>
-      <span class="na">audioRESTUrl</span><span class="p">:</span> <span class="dl">&#39;</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">&#39;</span>
+      <span class="na">audioRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">12345</span><span class="dl">&quot;</span><span class="p">,</span>
-      <span class="na">name</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">James Jones</span><span class="dl">&quot;</span><span class="p">,</span>
-      <span class="na">deviceId</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">&quot;</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">myChannelId</span><span class="dl">&quot;</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
       <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span><span class="p">,</span>
-      <span class="na">aloEventCallback</span><span class="p">:</span> <span class="nx">handleAudioEvent</span><span class="p">,</span>
       <span class="na">ttsEnabled</span><span class="p">:</span> <span class="kc">true</span>
     <span class="p">};</span>
     <span class="nx">aloAudio</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloAudio</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
     <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+    <span class="nx">initializeEventListeners</span><span class="p">();</span>
 <span class="p">}</span>
-<span class="kd">function</span> <span class="nx">handleAudioEvent</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">&quot;</span><span class="s2">ĀLO Audio Message</span><span class="dl">&quot;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+<span class="kd">function</span> <span class="nx">initializeEventListeners</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onDisconnect</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onDisconnect:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+    <span class="p">})</span>
+
+    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onConnectionChange</span><span class="dl">'</span><span class="p">,</span> <span class="nx">action</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onConnectionChange:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio connected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_ERROR</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio connection error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio reconnect pending.  Retrying in </span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">pendingRestartSeconds</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+
+    <span class="p">}));</span>
 <span class="p">}</span>
 </code></pre></div>
 <table><thead>
@@ -617,47 +642,72 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 <td>TBD</td>
 </tr>
 <tr>
-<td>aloEventCallback</td>
-<td>No</td>
-<td></td>
-<td>Although technically not required you&#39;ll want to provide a function that handles event messages coming from the audio service.  See <a href="#audio-sdk-handling-events">Handling Events</a></td>
-</tr>
-<tr>
 <td>ttsEnabled</td>
 <td>No</td>
 <td>false</td>
 <td>Set this to true if you want the user to hear TTS audio</td>
 </tr>
-</tbody></table></p>
+</tbody></table>
 
 <blockquote>
-<p>Example messages received during the connection process.</p>
+<p>Example onConnectionChange event payloads</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CONNECTION"</span><span class="p">,</span><span class="w">
-  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTING"</span><span class="p">,</span><span class="w">
-  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
-    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
-    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTING"</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
-  </span><span class="err">event:</span><span class="w"> </span><span class="s2">"CONNECTION"</span><span class="p">,</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTED"</span><span class="p">,</span><span class="w">
-  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
-    </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="p">,</span><span class="w">
-    </span><span class="err">deviceId:</span><span class="w"> </span><span class="s2">"8ae2488d-0767-4dcf-9652-8b4bd604b1b0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"DISCONNECTED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"ERROR"</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Lost connection to the server"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"RECONNECT_PENDING"</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Audio Server Reconnect Pending"</span><span class="p">,</span><span class="w">
+  </span><span class="err">pendingRestartSeconds:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="err">retryCount:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='audio-sdk-connecting-to-the-audio-service-connection-related-events'>Connection Related Events</h3>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onConnectionChange</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_DISCONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_RECONNECT_PENDING.</td>
+</tr>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table>
 
 <aside class="notice">
-Once you are connected to the Audio Service you will start receiving message in the function you specified as your <code>aloEventCallback</code>&#46;
-See <a href="#audio-sdk-handling-events">Handling Events</a> for more information on the types of message that may arrive.
+After you call the <code>connect()</code> method the Audio Service will start dispatching events that you should add event listeners for&#46;
+See <a href="#audio-sdk-handling-events">Handling Events</a> for more information about the types of events that are available.
 </aside>
 
 <h2 id='audio-sdk-disconnecting-from-the-audio-service'>Disconnecting from the Audio Service</h2>
@@ -671,16 +721,39 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
 
 <p>Invoking the <code>disconnect()</code> method will remove the user from any channel that they are currently participating in.  All connections to the audio service will also be terminated.  You will need to <a href="#audio-sdk-connecting-to-the-audio-service">connect</a> again before attempting to join a channel.</p>
 
+<blockquote>
+<p>Example onDisconnect event payloads</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">"DISCONNECTED"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"ERROR"</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Lost connection to the server"</span><span class="p">,</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='audio-sdk-disconnecting-from-the-audio-service-disconnect-related-events'>Disconnect Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table>
 <h2 id='audio-sdk-join-a-channel'>Join a Channel</h2>
-
 <p>(NOT YET IMPLEMENTED) but can use changeChannel.  TODO: we should probably change the the changeChannel method name to something that conveys that it means &quot;change or join&quot;</p>
-
 <h2 id='audio-sdk-change-channel'>Change Channel</h2>
-
 <blockquote>
 <p>Sample Channel Change.</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
 </code></pre></div>
 
