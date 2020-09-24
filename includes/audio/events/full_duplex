@@ -1,0 +1,32 @@
+<blockquote>
+<p>Example events payloads</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">onMicStateChange</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">"MIC_STATE_AVAILABLE"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">onMuteChange</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">audioType:</span><span class="w"> </span><span class="s2">"INTERCOM"</span><span class="p">,</span><span class="w">
+    </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='full-duplex-related-events'>Full Duplex Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onMicStateChange</td>
+<td>This event will let you know when the Full Duplex microphone button is available (meaning you are connected to an audio channel). The possible states are AloAudio.MIC_STATE_AVAILABLE, AloAudio.MIC_STATE_UNAVAILABLE and AloAudio.MIC_STATE_CHANGING_CHANNEL.  MIC_STATE_CHANGING_CHANNEL is a sub status MIC_STATE_UNAVAILABLE meaning you are in the process of changing channels.</td>
+</tr>
+<tr>
+<td>onMuteChange</td>
+<td>When call <code>startIntercom()</code> there will be an event stating that you microphone is not muted.  When you call <code>endIntercom()</code> the event will indicate that your microphone is muted.  See <a href="#audio-sdk-mute-and-unmute-audio">Mute and Unmute Audio</a> for more information</td>
+</tr>
+</tbody></table>

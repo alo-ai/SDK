@@ -1,0 +1,29 @@
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">initializeEventListeners</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onDisconnect</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onDisconnect:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+    <span class="p">})</span>
+
+    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">onConnectionChange</span><span class="dl">'</span><span class="p">,</span> <span class="nx">action</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onConnectionChange:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_CONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio connected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_DISCONNECTED</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio disconnected</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_ERROR</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio connection error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_CONNECTING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio connecting</span><span class="dl">"</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nx">AloAudio</span><span class="p">.</span><span class="na">CONNECTION_STATUS_RECONNECT_PENDING</span><span class="p">:</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ālo audio reconnect pending.  Retrying in </span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">pendingRestartSeconds</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+
+    <span class="p">}));</span>
+<span class="p">}</span>
+</code></pre></div>

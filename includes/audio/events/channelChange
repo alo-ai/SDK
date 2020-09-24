@@ -1,0 +1,36 @@
+<blockquote>
+<p>Example onJoinChannel event payloads</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINING"</span><span class="p">,</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINED"</span><span class="p">,</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">state:</span><span class="w"> </span><span class="s2">"JOINING"</span><span class="p">,</span><span class="w">
+    </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Something went wrong"</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='channel-joining-related-events'>Channel Joining Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onJoinChannel</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CHANNEL_STATUS_JOINING, AloAudio.CHANNEL_STATUS_JOINED, AloAudio.STATUS_FAILED.</td>
+</tr>
+</tbody></table>

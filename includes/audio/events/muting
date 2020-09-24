@@ -1,0 +1,21 @@
+<blockquote>
+<p>Example mute event payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">detail</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">audioType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">INTERCOM</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">isMuted</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id='mute-related-events'>Mute Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onMuteChange</td>
+<td>When call <code>startIntercom()</code> there will be an event stating that you microphone is not muted.  When you call <code>endIntercom()</code> the event will indicate that your microphone is muted.</td>
+</tr>
+</tbody></table>

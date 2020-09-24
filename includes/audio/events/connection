@@ -1,0 +1,54 @@
+<blockquote>
+<p>Example onConnectionChange event payloads</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTING"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"DISCONNECTED"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"ERROR"</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Lost connection to the server"</span><span class="p">,</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"RECONNECT_PENDING"</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Audio Server Reconnect Pending"</span><span class="p">,</span><span class="w">
+  </span><span class="err">pendingRestartSeconds:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="err">retryCount:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='connection-related-events'>Connection Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onConnectionChange</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+</tr>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table>

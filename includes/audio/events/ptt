@@ -1,0 +1,24 @@
+<h3 id='ptt-related-events'>PTT Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onPTTStateChange</td>
+<td>This event will let you know when the PTT button is available (meaning you are connected to an audio channel and no one else is speaking). The possible states are AloAudio.PTT_BUTTON_STATE_AVAILABLE and AloAudio.PTT_BUTTON_STATE_UNAVAILABLE.</td>
+</tr>
+<tr>
+<td>onPTTLockChange</td>
+<td>When you successfully acquire the lock to use the PTT there will be an event with the AloAudio.PTT_LOCK_ACQUIRED state.  When the lock is released the state will be AloAudio.PTT_LOCK_RELEASED</td>
+</tr>
+<tr>
+<td>onPTTSpeakerChange</td>
+<td>When a user acquires the PTT lock there will be an event containing information about the user that current attains the lock.</td>
+</tr>
+<tr>
+<td>onMuteChange</td>
+<td>When you acquire the lock there will be an event stating that you microphone is not muted.  When releasing the lock the event will indicate that your microphone is muted.</td>
+</tr>
+</tbody></table>

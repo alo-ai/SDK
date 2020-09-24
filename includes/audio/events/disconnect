@@ -1,0 +1,27 @@
+<blockquote>
+<p>Example onDisconnect event payloads</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">when</span><span class="w"> </span><span class="err">disconnect()</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">called</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">"DISCONNECTED"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">//</span><span class="w"> </span><span class="err">When</span><span class="w"> </span><span class="err">disconnected</span><span class="w"> </span><span class="err">unexpectedly</span><span class="w">
+</span><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">state:</span><span class="w"> </span><span class="s2">"ERROR"</span><span class="p">,</span><span class="w">
+  </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Lost connection to the server"</span><span class="p">,</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='disconnect-related-events'>Disconnect Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDisconnect</td>
+<td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
+</tr>
+</tbody></table>
