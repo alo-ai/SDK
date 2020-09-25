@@ -207,7 +207,7 @@
   </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-connection-related-events'>Connection Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -252,7 +252,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -297,7 +297,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -342,7 +342,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;VIDEO_LOCAL_PUBLISH_STATE_PUBLISH_PENDING&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -394,7 +394,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">&quot;6487&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -436,7 +436,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
     <span class="na">userId</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">2963</span><span class="dl">&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='presence-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -523,7 +523,7 @@ The event object may contain additional information about the event in <code>eve
   </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-connection-related-events'>Connection Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -556,7 +556,7 @@ The event object may contain additional information about the event in <code>eve
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -594,7 +594,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -623,7 +623,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;VIDEO_LOCAL_PUBLISH_STATE_PUBLISH_PENDING&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -669,7 +669,7 @@ The event object may contain additional information about the event in <code>eve
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">&quot;6487&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -697,7 +697,7 @@ The event object may contain additional information about the event in <code>eve
     <span class="na">userId</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">2963</span><span class="dl">&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='presence-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
