@@ -13,7 +13,7 @@
     </span><span class="err">state:</span><span class="w"> </span><span class="s2">"VIDEO_LOCAL_PUBLISH_STATE_PUBLISH_PENDING"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='audio-sdk-handling-events-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>

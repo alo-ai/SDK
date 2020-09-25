@@ -688,6 +688,12 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 <td>false</td>
 <td>Set this to true if you want the user to hear TTS audio</td>
 </tr>
+<tr>
+<td>audioInputDeviceId</td>
+<td>No</td>
+<td>This is to be the id of an audio input device.   When specified this is the device that will be used for audio input.  If no device is specified the operating system&#39;s default audio input device will be used.</td>
+<td></td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -1006,7 +1012,77 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
 
 <h2 id='audio-sdk-input-device-selection'>Input Device Selection</h2>
 
-<p>TODO:</p>
+<blockquote>
+<p>Example device list retrieval</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">getMediaList</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">listElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select#availableMicrophones</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">listElement</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">devices</span><span class="p">[</span><span class="nx">AloAudioSDK</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_AUDIO_INPUT</span><span class="p">]).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">device</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">inputOption</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">option</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">label</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">label</span><span class="p">;</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">label</span><span class="p">;</span>
+  <span class="nx">listElement</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">inputOption</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>Before joining an audio channel you have the option of selecting which audio input device (microphone) to use.  If you do not specify an input device the operating system&#39;s default device will be used.</p>
+
+<p>In order to get the current list of available audio devices you can use the <code>getMediaList()</code> method.</p>
+
+<p>You should also add a listener for the <code>onDeviceListUpdate</code> event.  If input devices change you can update your input device selection.</p>
+
+<blockquote>
+<p>Example onDeviceListUpdate event payload</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">detail</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="mi">80</span><span class="err">c</span><span class="mi">24043</span><span class="err">a</span><span class="mi">7</span><span class="err">acb</span><span class="mi">547</span><span class="err">b</span><span class="mi">1</span><span class="err">eda</span><span class="mi">7</span><span class="err">f</span><span class="mi">0</span><span class="err">de</span><span class="mi">20</span><span class="err">ea</span><span class="mi">9917e6</span><span class="err">dea</span><span class="mi">90091</span><span class="err">dab</span><span class="mi">7</span><span class="err">a</span><span class="mi">5</span><span class="err">a</span><span class="mi">5258</span><span class="err">f</span><span class="mi">74e91714</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"80c24043a7acb547b1eda7f0de20ea9917e6dea90091dab7a5a5258f74e91714"</span><span class="p">,</span><span class="w">
+        </span><span class="err">label:</span><span class="w"> </span><span class="s2">""</span><span class="err">Microphone</span><span class="w"> </span><span class="err">(HD</span><span class="w"> </span><span class="err">Webcam</span><span class="w"> </span><span class="err">C</span><span class="mi">615</span><span class="err">)</span><span class="w"> </span><span class="err">(</span><span class="mi">046</span><span class="err">d:</span><span class="mi">082</span><span class="err">c)</span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="err">type:</span><span class="w"> </span><span class="s2">"audioinput"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="mi">752999</span><span class="err">ac</span><span class="mi">8</span><span class="err">b</span><span class="mi">718</span><span class="err">aa</span><span class="mi">41</span><span class="err">f</span><span class="mi">3</span><span class="err">d</span><span class="mi">2</span><span class="err">a</span><span class="mi">9755</span><span class="err">dfabf</span><span class="mi">2</span><span class="err">b</span><span class="mi">8</span><span class="err">f</span><span class="mi">80</span><span class="err">d</span><span class="mi">613701</span><span class="err">a</span><span class="mi">36</span><span class="err">b</span><span class="mi">487939</span><span class="err">b</span><span class="mi">38</span><span class="err">ab</span><span class="mi">6095</span><span class="err">d:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"752999ac8b718aa41f3d2a9755dfabf2b8f80d613701a36b487939b38ab6095d"</span><span class="p">,</span><span class="w">
+        </span><span class="err">label:</span><span class="w"> </span><span class="s2">"Microphone Array (Realtek(R) Audio)"</span><span class="p">,</span><span class="w">
+        </span><span class="err">type:</span><span class="w"> </span><span class="s2">"audioinput"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<h3 id='presence-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDeviceListUpdate</td>
+<td>This event will let you know the list of available input devices has changed.</td>
+</tr>
+</tbody></table>
+
+<p>When you instantiate the AloAudio object you can specify the input device id on the <code>audioInputDeviceId</code> property.  See: <a href="#audio-sdk-connecting-to-the-audio-service-instantiation-properties">Instantiation Properties</a></p>
+
+<blockquote>
+<p>Example change audio input code</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">changeAudioInput</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">);</span>
+</code></pre></div>
+
+<p>If you are already in an audio channel you can change your input device with the <code>changeAudioInput</code> method.</p>
+
+<aside class="notice">
+If you have specified an audio input device that becomes unavailable (unplugged for example), the audio input will change to the operating system's default device.
+</aside>
 
 <h2 id='audio-sdk-handling-channel-participants'>Handling Channel Participants</h2>
 
@@ -1307,6 +1383,20 @@ The event object may contain additional information about the event in <code>eve
 </tr>
 </tbody></table></p>
 
+<h3 id='presence-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDeviceListUpdate</td>
+<td>This event will let you know the list of available input devices has changed.</td>
+</tr>
+</tbody></table>
+
 <blockquote>
 <p>Example onParticipantsChanged event payloads</p>
 </blockquote>
@@ -1520,6 +1610,12 @@ The event object may contain additional information about the event in <code>eve
 <td></td>
 <td>TBD</td>
 </tr>
+<tr>
+<td>videoInputDeviceId</td>
+<td>No</td>
+<td></td>
+<td>This is to be the id of a video input device.   When specified this is the device that will be used for video input.  If no device is specified the operating system&#39;s default video input device will be used.</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -1563,7 +1659,7 @@ The event object may contain additional information about the event in <code>eve
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='audio-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
 
-<p><table><thead>
+<table><thead>
 <tr>
 <th>Event</th>
 <th>Description</th>
@@ -1577,22 +1673,18 @@ The event object may contain additional information about the event in <code>eve
 <td>onDisconnect</td>
 <td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
 </tr>
-</tbody></table></p></p>
+</tbody></table></p>
 
 <aside class="notice">
 After you call the <code>connect()</code> method the Video Service will start dispatching events that you should add event listeners for&#46;
 See <a href="#video-sdk-handling-events">Handling Events</a> for more information about the types of events that are available.
 </aside>
-
 <h2 id='video-sdk-disconnecting-from-the-video-service'>Disconnecting from the Video Service</h2>
-
 <blockquote>
 <p>Video Service Disconnect.</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
 </code></pre></div>
-
 <p>Invoking the <code>disconnect()</code> method will remove the user from any channel that they are currently participating in.  All connections to the video service will also be terminated.  You will need to <a href="#video-sdk-connecting-to-the-video-service">connect</a> again before attempting to join a channel.</p>
 
 <blockquote>
@@ -1623,16 +1715,12 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
 </tr>
 </tbody></table></p>
-
 <h2 id='video-sdk-change-channel'>Change Channel</h2>
-
 <blockquote>
 <p>Sample Channel Change.</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
 </code></pre></div>
-
 <p>To change the video channel you invoke the <code>changeChannel()</code> method.</p>
 
 <blockquote>
@@ -1672,8 +1760,76 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CHANNEL_STATUS_JOINING, AloVideo.CHANNEL_STATUS_JOINED, AloVideo.STATUS_FAILED.</td>
 </tr>
 </tbody></table></p>
+<h2 id='video-sdk-input-device-selection'>Input Device Selection</h2>
+<blockquote>
+<p>Example device list retrieval</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">getMediaList</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">listElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select#availableCameras</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">listElement</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 
-<h2 id='video-sdk-input-device-selection'>Input Device Selection</h2><h2 id='video-sdk-publishing-local-video'>Publishing Local Video</h2>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">devices</span><span class="p">[</span><span class="nx">AloVideoSDK</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_VIDEO_INPUT</span><span class="p">]).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">device</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">inputOption</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">option</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">label</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">label</span><span class="p">;</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">label</span><span class="p">;</span>
+  <span class="nx">listElement</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">inputOption</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Before joining a video channel you have the option of selecting which video input device (camera) to use.  If you do not specify an input device the operating system&#39;s default device will be used.</p>
+
+<p>In order to get the current list of available video devices you can use the <code>getMediaList()</code> method.</p>
+
+<p>You should also add a listener for the <code>onDeviceListUpdate</code> event.  If input devices change you can update your input device selection.</p>
+
+<blockquote>
+<p>Example onDeviceListUpdate event payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">detail</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="mi">99</span><span class="err">ee</span><span class="mi">472997</span><span class="err">a</span><span class="mi">484234</span><span class="err">acd</span><span class="mi">080</span><span class="err">b</span><span class="mi">1153</span><span class="err">c</span><span class="mi">88</span><span class="err">bd</span><span class="mi">3</span><span class="err">a</span><span class="mi">80</span><span class="err">dba</span><span class="mi">716179</span><span class="err">a</span><span class="mi">0</span><span class="err">c</span><span class="mi">90</span><span class="err">af</span><span class="mi">1</span><span class="err">c</span><span class="mi">60</span><span class="err">de</span><span class="mi">83685</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"99ee472997a484234acd080b1153c88bd3a80dba716179a0c90af1c60de83685"</span><span class="p">,</span><span class="w">
+        </span><span class="err">label:</span><span class="w"> </span><span class="s2">"Logitech HD Webcam C615 (046d:082c)"</span><span class="p">,</span><span class="w">
+        </span><span class="err">type:</span><span class="w"> </span><span class="s2">"videoinput"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">c</span><span class="mi">72</span><span class="err">ee</span><span class="mi">2</span><span class="err">c</span><span class="mi">098</span><span class="err">ce</span><span class="mi">749</span><span class="err">a</span><span class="mi">5245</span><span class="err">ebbfd</span><span class="mi">0560349</span><span class="err">c</span><span class="mi">48929</span><span class="err">b</span><span class="mi">42</span><span class="err">f</span><span class="mi">89</span><span class="err">f</span><span class="mi">7</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">3969</span><span class="err">ba</span><span class="mi">1</span><span class="err">b</span><span class="mi">5087517</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"c72ee2c098ce749a5245ebbfd0560349c48929b42f89f7a3a3969ba1b5087517"</span><span class="p">,</span><span class="w">
+        </span><span class="err">label:</span><span class="w"> </span><span class="s2">"Some other camera,
+        type: "</span><span class="err">videoinput</span><span class="s2">"
+      }
+  }
+}
+</span></code></pre></div>
+<h3 id='audio-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDeviceListUpdate</td>
+<td>This event will let you know the list of available input devices has changed.</td>
+</tr>
+</tbody></table>
+
+<p>When you instantiate the AloVideo object you can specify the input device id on the <code>videoInputDeviceId</code> property.  See: <a href="#video-sdk-connecting-to-the-video-service-instantiation-properties">Instantiation Properties</a></p>
+
+<blockquote>
+<p>Example change video input code</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">changeVideoInput</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">);</span>
+</code></pre></div>
+
+<p>If you are already in an video channel you can change your input device with the <code>changeVideoInput</code> method.</p>
+
+<aside class="notice">
+If you have specified an video input device that becomes unavailable (unplugged for example), the video input will change to the operating system's default device.
+</aside>
+
+<h2 id='video-sdk-publishing-local-video'>Publishing Local Video</h2>
 
 <blockquote>
 <p>Sample Publish Video.</p>

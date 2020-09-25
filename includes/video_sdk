@@ -166,6 +166,12 @@
 <td></td>
 <td>TBD</td>
 </tr>
+<tr>
+<td>videoInputDeviceId</td>
+<td>No</td>
+<td></td>
+<td>This is to be the id of a video input device.   When specified this is the device that will be used for video input.  If no device is specified the operating system&#39;s default video input device will be used.</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -207,7 +213,7 @@
   </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-connection-related-events'>Connection Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -252,7 +258,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -297,7 +303,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -309,7 +315,73 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CHANNEL_STATUS_JOINING, AloVideo.CHANNEL_STATUS_JOINED, AloVideo.STATUS_FAILED.</td>
 </tr>
 </tbody></table></p>
-<h2 id='video-sdk-input-device-selection'>Input Device Selection</h2><h2 id='video-sdk-publishing-local-video'>Publishing Local Video</h2>
+<h2 id='video-sdk-input-device-selection'>Input Device Selection</h2>
+<blockquote>
+<p>Example device list retrieval</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">getMediaList</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">listElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select#availableCameras</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">listElement</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">devices</span><span class="p">[</span><span class="nx">AloVideoSDK</span><span class="p">.</span><span class="nx">MEDIA_DEVICE_LIST_VIDEO_INPUT</span><span class="p">]).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">device</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">inputOption</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">option</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">label</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">label</span><span class="p">;</span>
+  <span class="nx">inputOption</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">label</span><span class="p">;</span>
+  <span class="nx">listElement</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">inputOption</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Before joining a video channel you have the option of selecting which video input device (camera) to use.  If you do not specify an input device the operating system&#39;s default device will be used.</p>
+
+<p>In order to get the current list of available video devices you can use the <code>getMediaList()</code> method.</p>
+
+<p>You should also add a listener for the <code>onDeviceListUpdate</code> event.  If input devices change you can update your input device selection.</p>
+
+<blockquote>
+<p>Example onDeviceListUpdate event payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">detail</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="mi">99</span><span class="err">ee</span><span class="mi">472997</span><span class="err">a</span><span class="mi">484234</span><span class="err">acd</span><span class="mi">080</span><span class="err">b</span><span class="mi">1153</span><span class="err">c</span><span class="mi">88</span><span class="err">bd</span><span class="mi">3</span><span class="err">a</span><span class="mi">80</span><span class="err">dba</span><span class="mi">716179</span><span class="err">a</span><span class="mi">0</span><span class="err">c</span><span class="mi">90</span><span class="err">af</span><span class="mi">1</span><span class="err">c</span><span class="mi">60</span><span class="err">de</span><span class="mi">83685</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"99ee472997a484234acd080b1153c88bd3a80dba716179a0c90af1c60de83685"</span><span class="p">,</span><span class="w">
+        </span><span class="err">label:</span><span class="w"> </span><span class="s2">"Logitech HD Webcam C615 (046d:082c)"</span><span class="p">,</span><span class="w">
+        </span><span class="err">type:</span><span class="w"> </span><span class="s2">"videoinput"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">c</span><span class="mi">72</span><span class="err">ee</span><span class="mi">2</span><span class="err">c</span><span class="mi">098</span><span class="err">ce</span><span class="mi">749</span><span class="err">a</span><span class="mi">5245</span><span class="err">ebbfd</span><span class="mi">0560349</span><span class="err">c</span><span class="mi">48929</span><span class="err">b</span><span class="mi">42</span><span class="err">f</span><span class="mi">89</span><span class="err">f</span><span class="mi">7</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">3969</span><span class="err">ba</span><span class="mi">1</span><span class="err">b</span><span class="mi">5087517</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"c72ee2c098ce749a5245ebbfd0560349c48929b42f89f7a3a3969ba1b5087517"</span><span class="p">,</span><span class="w">
+        </span><span class="err">label:</span><span class="w"> </span><span class="s2">"Some other camera,
+        type: "</span><span class="err">videoinput</span><span class="s2">"
+      }
+  }
+}
+</span></code></pre></div>
+<h3 id='audio-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDeviceListUpdate</td>
+<td>This event will let you know the list of available input devices has changed.</td>
+</tr>
+</tbody></table>
+
+<p>When you instantiate the AloVideo object you can specify the input device id on the <code>videoInputDeviceId</code> property.  See: <a href="#video-sdk-connecting-to-the-video-service-instantiation-properties">Instantiation Properties</a></p>
+
+<blockquote>
+<p>Example change video input code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">changeVideoInput</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">);</span>
+</code></pre></div>
+<p>If you are already in an video channel you can change your input device with the <code>changeVideoInput</code> method.</p>
+
+<aside class="notice">
+If you have specified an video input device that becomes unavailable (unplugged for example), the video input will change to the operating system's default device.
+</aside>
+<h2 id='video-sdk-publishing-local-video'>Publishing Local Video</h2>
 <blockquote>
 <p>Sample Publish Video.</p>
 </blockquote>
@@ -342,7 +414,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;VIDEO_LOCAL_PUBLISH_STATE_PUBLISH_PENDING&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -394,7 +466,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">&quot;6487&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -436,7 +508,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
     <span class="na">userId</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">2963</span><span class="dl">&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='audio-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -523,7 +595,7 @@ The event object may contain additional information about the event in <code>eve
   </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-connection-related-events'>Connection Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -556,7 +628,7 @@ The event object may contain additional information about the event in <code>eve
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -594,7 +666,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -623,7 +695,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;VIDEO_LOCAL_PUBLISH_STATE_PUBLISH_PENDING&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-publishing-local-video-related-events'>Publishing Local Video Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -669,7 +741,7 @@ The event object may contain additional information about the event in <code>eve
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">&quot;6487&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -697,7 +769,7 @@ The event object may contain additional information about the event in <code>eve
     <span class="na">userId</span><span class="p">:</span> <span class="dl">&quot;</span><span class="s2">2963</span><span class="dl">&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='audio-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>

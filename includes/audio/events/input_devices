@@ -1,0 +1,12 @@
+<h3 id='input-device-related-events'>Input Device Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onDeviceListUpdate</td>
+<td>This event will let you know the list of available input devices has changed.</td>
+</tr>
+</tbody></table>
