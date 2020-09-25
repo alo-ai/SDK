@@ -1,0 +1,36 @@
+<blockquote>
+<p>Example onParticipantsChanged event payloads</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">currentParticipantId:</span><span class="w"> </span><span class="s2">"871f35b5-479e-4b99-acba-71ab6fe50768"</span><span class="p">,</span><span class="w">
+    </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+    </span><span class="err">participants:</span><span class="w"> </span><span class="err">Array(</span><span class="mi">2</span><span class="err">)</span><span class="w">
+      </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="err">Participant</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"871f35b5-479e-4b99-acba-71ab6fe50768"</span><span class="w">
+        </span><span class="err">isPublishingVideo:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="err">mediaStream:</span><span class="w"> </span><span class="err">MediaStream</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+        </span><span class="err">muted:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Jim Jones"</span><span class="w">
+        </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"2963"</span><span class="w">
+      </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="err">Participant</span><span class="w">
+        </span><span class="err">id:</span><span class="w"> </span><span class="s2">"fd8aef24-bbb4-48aa-9d7c-f90d1c30d9a5"</span><span class="w">
+        </span><span class="err">isPublishingVideo:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="err">mediaStream:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="err">muted:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="err">name:</span><span class="w"> </span><span class="s2">"Sally Smith"</span><span class="w">
+        </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"6487"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onParticipantsChanged</td>
+<td>When you join a channel you will there will be an event that gives you a list of the current channel participants.  While in a given channel a similar event each time a participant enters or leaves the channel as well as when they publish/unpublish video.</td>
+</tr>
+</tbody></table>

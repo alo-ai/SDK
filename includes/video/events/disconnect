@@ -13,7 +13,7 @@
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">"Lost connection to the server"</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>

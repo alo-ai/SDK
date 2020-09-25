@@ -1,5 +1,5 @@
 <blockquote>
-<p>Example events payloads</p>
+<p>Example microphone event payloads</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">onMicStateChange</span><span class="w">
 </span><span class="p">{</span><span class="w">

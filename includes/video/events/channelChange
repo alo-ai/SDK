@@ -22,7 +22,7 @@
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>

@@ -16,6 +16,6 @@
 </thead><tbody>
 <tr>
 <td>onMuteChange</td>
-<td>When call <code>startIntercom()</code> there will be an event stating that you microphone is not muted.  When you call <code>endIntercom()</code> the event will indicate that your microphone is muted.</td>
+<td>After <code>startIntercom()</code> is called there will be an event stating that you microphone is not muted.  When you call <code>endIntercom()</code> the event will indicate that your microphone is muted.</td>
 </tr>
 </tbody></table>

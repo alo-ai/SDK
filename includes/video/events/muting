@@ -1,0 +1,26 @@
+<blockquote>
+<p>Example mute event payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">detail</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">participant</span><span class="p">:</span> <span class="nx">Participant</span>
+    <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1145_ON_7d310571-01dd-475c-9505-d06383414581</span><span class="dl">"</span>
+    <span class="na">isPublishingVideo</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="na">mediaStream</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="na">muted</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jim Jones</span><span class="dl">"</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2963</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id='chat-sdk-mute-related-events'>Mute Related Events</h3>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>onMuteChange</td>
+<td>After <code>muteParticipant()</code> is called there will be an event stating whether or not the given participant is currently muted.</td>
+</tr>
+</tbody></table>
