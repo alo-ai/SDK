@@ -12,7 +12,7 @@
     <span class="na">userId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2963</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='audio-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>

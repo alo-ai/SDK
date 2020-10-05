@@ -22,7 +22,7 @@
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">"6487"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='audio-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
