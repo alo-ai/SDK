@@ -429,16 +429,16 @@
               </ul>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#kittens-remove" class="toc-h1 toc-link" data-title="Kittens (remove)">Kittens (remove)</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#kittens-get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#kittens-remove-get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
                   </li>
                   <li>
-                    <a href="#kittens-get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#kittens-remove-get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
                   </li>
                   <li>
-                    <a href="#kittens-delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#kittens-remove-delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
                   </li>
               </ul>
           </li>
@@ -735,7 +735,7 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
   </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-connection-related-events'>Connection Related Events</h3>
 
 <table><thead>
 <tr>
@@ -781,7 +781,7 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -828,7 +828,7 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -915,7 +915,7 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id='presence-sdk-handling-events-ptt-related-events'>PTT Related Events</h3>
+<h3 id='presence-sdk-ptt-related-events'>PTT Related Events</h3>
 
 <table><thead>
 <tr>
@@ -962,7 +962,7 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
     </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-full-duplex-related-events'>Full Duplex Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-full-duplex-related-events'>Full Duplex Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -995,7 +995,7 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
     <span class="na">isMuted</span><span class="p">:</span> <span class="kc">true</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='presence-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1055,7 +1055,7 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<h3 id='presence-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
+<h3 id='presence-sdk-input-device-related-events'>Input Device Related Events</h3>
 
 <table><thead>
 <tr>
@@ -1115,7 +1115,7 @@ If you have specified an audio input device that becomes unavailable (unplugged 
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">&quot;6487&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1216,7 +1216,7 @@ The event object may contain additional information about the event in <code>eve
   </span><span class="err">user:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-connection-related-events'>Connection Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-connection-related-events'>Connection Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1249,7 +1249,7 @@ The event object may contain additional information about the event in <code>eve
   </span><span class="err">message:</span><span class="w"> </span><span class="s2">&quot;Lost connection to the server&quot;</span><span class="p">,</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-disconnect-related-events'>Disconnect Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-disconnect-related-events'>Disconnect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1287,7 +1287,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1300,7 +1300,7 @@ The event object may contain additional information about the event in <code>eve
 </tr>
 </tbody></table></p>
 
-<h3 id='presence-sdk-handling-events-ptt-related-events'>PTT Related Events</h3>
+<h3 id='presence-sdk-ptt-related-events'>PTT Related Events</h3>
 
 <table><thead>
 <tr>
@@ -1343,7 +1343,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">isMuted:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-full-duplex-related-events'>Full Duplex Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-full-duplex-related-events'>Full Duplex Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1370,7 +1370,7 @@ The event object may contain additional information about the event in <code>eve
     <span class="na">isMuted</span><span class="p">:</span> <span class="kc">true</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='presence-sdk-handling-events-mute-related-events'>Mute Related Events</h3>
+</code></pre></div><h3 id='presence-sdk-mute-related-events'>Mute Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1383,7 +1383,7 @@ The event object may contain additional information about the event in <code>eve
 </tr>
 </tbody></table></p>
 
-<h3 id='presence-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
+<h3 id='presence-sdk-input-device-related-events'>Input Device Related Events</h3>
 
 <table><thead>
 <tr>
@@ -1418,7 +1418,7 @@ The event object may contain additional information about the event in <code>eve
         </span><span class="err">userId:</span><span class="w"> </span><span class="s2">&quot;6487&quot;</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-handling-events-channel-participant-related-events'>Channel Participant Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-participant-related-events'>Channel Participant Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1762,7 +1762,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 </tbody></table></p>
 <h2 id='video-sdk-input-device-selection'>Input Device Selection</h2>
 <blockquote>
-<p>Example device list retrieval:</p>
+<p>Example device list retrieval</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">getMediaList</span><span class="p">();</span>
 <span class="kd">const</span> <span class="nx">listElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select#availableCameras</span><span class="dl">'</span><span class="p">);</span>
@@ -2254,7 +2254,7 @@ The event object may contain additional information about the event in <code>eve
 <td>After <code>muteParticipant()</code> is called there will be an event stating whether or not the given participant is currently muted.</td>
 </tr>
 </tbody></table></p>
-<h1 id='kittens'>Kittens</h1><h2 id='kittens-get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='kittens-remove'>Kittens (remove)</h1><h2 id='kittens-remove-get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -2290,9 +2290,9 @@ The event object may contain additional information about the event in <code>eve
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves all kittens.</p>
-<h3 id='kittens-get-all-kittens-http-request'>HTTP Request</h3>
+<h3 id='kittens-remove-get-all-kittens-http-request'>HTTP Request</h3>
 <p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='kittens-get-all-kittens-query-parameters'>Query Parameters</h3>
+<h3 id='kittens-remove-get-all-kittens-query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2315,7 +2315,7 @@ The event object may contain additional information about the event in <code>eve
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside>
-<h2 id='kittens-get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='kittens-remove-get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -2344,9 +2344,9 @@ Remember — a happy kitten is an authenticated kitten!
 <p>This endpoint retrieves a specific kitten.</p>
 
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='kittens-get-a-specific-kitten-http-request'>HTTP Request</h3>
+<h3 id='kittens-remove-get-a-specific-kitten-http-request'>HTTP Request</h3>
 <p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='kittens-get-a-specific-kitten-url-parameters'>URL Parameters</h3>
+<h3 id='kittens-remove-get-a-specific-kitten-url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2358,7 +2358,7 @@ Remember — a happy kitten is an authenticated kitten!
 <td>The ID of the kitten to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='kittens-delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='kittens-remove-delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -2383,9 +2383,9 @@ Remember — a happy kitten is an authenticated kitten!
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint deletes a specific kitten.</p>
-<h3 id='kittens-delete-a-specific-kitten-http-request'>HTTP Request</h3>
+<h3 id='kittens-remove-delete-a-specific-kitten-http-request'>HTTP Request</h3>
 <p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='kittens-delete-a-specific-kitten-url-parameters'>URL Parameters</h3>
+<h3 id='kittens-remove-delete-a-specific-kitten-url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>

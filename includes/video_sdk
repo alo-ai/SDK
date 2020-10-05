@@ -317,7 +317,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 </tbody></table></p>
 <h2 id='video-sdk-input-device-selection'>Input Device Selection</h2>
 <blockquote>
-<p>Example device list retrieval:</p>
+<p>Example device list retrieval</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">getMediaList</span><span class="p">();</span>
 <span class="kd">const</span> <span class="nx">listElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select#availableCameras</span><span class="dl">'</span><span class="p">);</span>
