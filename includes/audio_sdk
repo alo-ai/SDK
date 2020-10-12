@@ -13,15 +13,11 @@
 <p><code>npm install --save alo-audio-js</code></p>
 
 <p>TODO: will we also have a CDN version of the SDK?</p>
-<h2 id='audio-sdk-connecting-to-the-audio-service'>Connecting to the Audio Service</h2>
+<h2 id='audio-sdk-instantiating-the-audio-service-object'>Instantiating the Audio Service Object</h2>
 <p>In order to instantiate the AloAudio object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
 
 <p><code>aloAudio = new AloAudio(props);</code></p>
-
-<p>To connect to the audio service you call the <code>connect()</code> method:</p>
-
-<p><code>aloAudio.connect();</code></p>
-<h3 id='audio-sdk-connecting-to-the-audio-service-user-object'>User Object</h3>
+<h3 id='audio-sdk-instantiating-the-audio-service-object-user-object'>User Object</h3>
 <p>TODO: create a User object class (maybe call it Participant instead)</p>
 
 <p>The user object defines the user that will be participating in the audio channels.</p>
@@ -58,75 +54,21 @@
 <td>Unique device identifier.  If not provided a random id will be generated.</td>
 </tr>
 </tbody></table>
-<h3 id='audio-sdk-connecting-to-the-audio-service-current-channel-object'>Current Channel Object</h3>
-<p>TODO: create a Channel object class</p>
-
-<p>The current channel object defines the audio channel that the user is currently participating in.</p>
-
-<blockquote>
-<p>Sample Current Channel Object.</p>
-</blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span><span class="p">,</span>
-  <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
-<span class="p">}</span>
-</code></pre></div>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Yes</td>
-<td></td>
-<td>Unique alphanumeric channel identifier</td>
-</tr>
-<tr>
-<td>isIntercom</td>
-<td>No</td>
-<td>false</td>
-<td>If true this is a full duplex channel.  Otherwise it is a PTT channel.  TODO: do we want to use the word &quot;intercom&quot; ?</td>
-</tr>
-<tr>
-<td>bcp47Language</td>
-<td>No</td>
-<td></td>
-<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
-</tr>
-<tr>
-<td>bcp47LanguageTag</td>
-<td>No</td>
-<td></td>
-<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
-</tr>
-</tbody></table>
-<h3 id='audio-sdk-connecting-to-the-audio-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
+<h3 id='audio-sdk-instantiating-the-audio-service-object-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="na">audioUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
-      <span class="na">audioRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
     <span class="p">};</span>
-    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
-    <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
-      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span><span class="p">,</span>
       <span class="na">ttsEnabled</span><span class="p">:</span> <span class="kc">true</span>
     <span class="p">};</span>
     <span class="nx">aloAudio</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloAudio</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
     <span class="nx">initializeEventListeners</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -175,12 +117,6 @@
 <td>The <a href="#audio-sdk-connecting-to-the-audio-service-user-object">user</a> object that defines the current user</td>
 </tr>
 <tr>
-<td>currentChannel</td>
-<td>No</td>
-<td></td>
-<td>The <a href="#audio-sdk-connecting-to-the-audio-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the audio service but will not immediately join a channel.</td>
-</tr>
-<tr>
 <td>aloConnections</td>
 <td>Yes</td>
 <td></td>
@@ -205,6 +141,10 @@
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -248,7 +188,7 @@
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_ACQUIRING_ACCESS, AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
@@ -257,7 +197,7 @@
 </tbody></table></p>
 
 <aside class="notice">
-After you call the <code>connect()</code> method the Audio Service will start dispatching events that you should add event listeners for&#46;
+After you call the <code>connect(channel)</code> method the Audio Service will start dispatching events that you should add event listeners for&#46;
 See <a href="#audio-sdk-handling-events">Handling Events</a> for more information about the types of events that are available.
 </aside>
 <h2 id='audio-sdk-disconnecting-from-the-audio-service'>Disconnecting from the Audio Service</h2>
@@ -296,15 +236,77 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
 <td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
 </tr>
 </tbody></table></p>
-<h2 id='audio-sdk-join-a-channel'>Join a Channel</h2>
-<p>(NOT YET IMPLEMENTED) but can use changeChannel.  TODO: we should probably change the the changeChannel method name to something that conveys that it means &quot;change or join&quot;</p>
-<h2 id='audio-sdk-change-channel'>Change Channel</h2>
+<h2 id='audio-sdk-connect-to-a-channel'>Connect to a Channel</h2>
 <blockquote>
-<p>Sample Channel Change.</p>
+<p>Sample Channel Connect.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
 </code></pre></div>
-<p>To change the audio channel you invoke the <code>changeChannel()</code> method.</p>
+<p>To connect to an audio service channel you call the <code>connect(channel)</code> method:</p>
+
+<p><code>aloAudio.connect(channel);</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>channel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#audio-sdk-connect-to-a-channel-channel-object">channel</a> object defining which channel to join upon connection to the service.</td>
+</tr>
+</tbody></table>
+<h3 id='audio-sdk-connect-to-a-channel-channel-object'>Channel Object</h3>
+<p>TODO: create a Channel object class</p>
+
+<p>The current channel object defines the audio channel that the user is currently participating in.</p>
+
+<blockquote>
+<p>Sample Channel Object.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+<tr>
+<td>isIntercom</td>
+<td>No</td>
+<td>false</td>
+<td>If true this is a full duplex channel.  Otherwise it is a PTT channel.  TODO: do we want to use the word &quot;intercom&quot; ?</td>
+</tr>
+<tr>
+<td>bcp47Language</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+<tr>
+<td>bcp47LanguageTag</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+</tbody></table>
 
 <blockquote>
 <p>Example onJoinChannel event payloads</p>
@@ -331,7 +333,7 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='channel-connect-related-events'>Channel Connect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -657,6 +659,10 @@ The event object may contain additional information about the event in <code>eve
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -700,7 +706,7 @@ The event object may contain additional information about the event in <code>eve
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_ACQUIRING_ACCESS, AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
@@ -762,7 +768,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='channel-connect-related-events'>Channel Connect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>

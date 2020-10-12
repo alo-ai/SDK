@@ -332,16 +332,13 @@
                     <a href="#audio-sdk-prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
                   </li>
                   <li>
-                    <a href="#audio-sdk-connecting-to-the-audio-service" class="toc-h2 toc-link" data-title="Connecting to the Audio Service">Connecting to the Audio Service</a>
+                    <a href="#audio-sdk-instantiating-the-audio-service-object" class="toc-h2 toc-link" data-title="Instantiating the Audio Service Object">Instantiating the Audio Service Object</a>
                   </li>
                   <li>
                     <a href="#audio-sdk-disconnecting-from-the-audio-service" class="toc-h2 toc-link" data-title="Disconnecting from the Audio Service">Disconnecting from the Audio Service</a>
                   </li>
                   <li>
-                    <a href="#audio-sdk-join-a-channel" class="toc-h2 toc-link" data-title="Join a Channel">Join a Channel</a>
-                  </li>
-                  <li>
-                    <a href="#audio-sdk-change-channel" class="toc-h2 toc-link" data-title="Change Channel">Change Channel</a>
+                    <a href="#audio-sdk-connect-to-a-channel" class="toc-h2 toc-link" data-title="Connect to a Channel">Connect to a Channel</a>
                   </li>
                   <li>
                     <a href="#audio-sdk-leave-channel" class="toc-h2 toc-link" data-title="Leave Channel">Leave Channel</a>
@@ -388,13 +385,13 @@
                     <a href="#video-sdk-prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
                   </li>
                   <li>
-                    <a href="#video-sdk-connecting-to-the-video-service" class="toc-h2 toc-link" data-title="Connecting to the Video Service">Connecting to the Video Service</a>
+                    <a href="#video-sdk-instantiating-the-video-service-object" class="toc-h2 toc-link" data-title="Instantiating the Video Service Object">Instantiating the Video Service Object</a>
                   </li>
                   <li>
                     <a href="#video-sdk-disconnecting-from-the-video-service" class="toc-h2 toc-link" data-title="Disconnecting from the Video Service">Disconnecting from the Video Service</a>
                   </li>
                   <li>
-                    <a href="#video-sdk-change-channel" class="toc-h2 toc-link" data-title="Change Channel">Change Channel</a>
+                    <a href="#video-sdk-connect-channel" class="toc-h2 toc-link" data-title="Connect Channel">Connect Channel</a>
                   </li>
                   <li>
                     <a href="#video-sdk-input-device-selection" class="toc-h2 toc-link" data-title="Input Device Selection">Input Device Selection</a>
@@ -499,17 +496,13 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 
 <p>TODO: will we also have a CDN version of the SDK?</p>
 
-<h2 id='audio-sdk-connecting-to-the-audio-service'>Connecting to the Audio Service</h2>
+<h2 id='audio-sdk-instantiating-the-audio-service-object'>Instantiating the Audio Service Object</h2>
 
 <p>In order to instantiate the AloAudio object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
 
 <p><code>aloAudio = new AloAudio(props);</code></p>
 
-<p>To connect to the audio service you call the <code>connect()</code> method:</p>
-
-<p><code>aloAudio.connect();</code></p>
-
-<h3 id='audio-sdk-connecting-to-the-audio-service-user-object'>User Object</h3>
+<h3 id='audio-sdk-instantiating-the-audio-service-object-user-object'>User Object</h3>
 
 <p>TODO: create a User object class (maybe call it Participant instead)</p>
 
@@ -550,79 +543,21 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 </tr>
 </tbody></table>
 
-<h3 id='audio-sdk-connecting-to-the-audio-service-current-channel-object'>Current Channel Object</h3>
-
-<p>TODO: create a Channel object class</p>
-
-<p>The current channel object defines the audio channel that the user is currently participating in.</p>
-
-<blockquote>
-<p>Sample Current Channel Object.</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span><span class="p">,</span>
-  <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Yes</td>
-<td></td>
-<td>Unique alphanumeric channel identifier</td>
-</tr>
-<tr>
-<td>isIntercom</td>
-<td>No</td>
-<td>false</td>
-<td>If true this is a full duplex channel.  Otherwise it is a PTT channel.  TODO: do we want to use the word &quot;intercom&quot; ?</td>
-</tr>
-<tr>
-<td>bcp47Language</td>
-<td>No</td>
-<td></td>
-<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
-</tr>
-<tr>
-<td>bcp47LanguageTag</td>
-<td>No</td>
-<td></td>
-<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
-</tr>
-</tbody></table>
-
-<h3 id='audio-sdk-connecting-to-the-audio-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
+<h3 id='audio-sdk-instantiating-the-audio-service-object-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToAudio</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="na">audioUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
-      <span class="na">audioRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
     <span class="p">};</span>
-    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
-    <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
-      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span><span class="p">,</span>
       <span class="na">ttsEnabled</span><span class="p">:</span> <span class="kc">true</span>
     <span class="p">};</span>
     <span class="nx">aloAudio</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloAudio</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-    <span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
     <span class="nx">initializeEventListeners</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -671,12 +606,6 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 <td>The <a href="#audio-sdk-connecting-to-the-audio-service-user-object">user</a> object that defines the current user</td>
 </tr>
 <tr>
-<td>currentChannel</td>
-<td>No</td>
-<td></td>
-<td>The <a href="#audio-sdk-connecting-to-the-audio-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the audio service but will not immediately join a channel.</td>
-</tr>
-<tr>
 <td>aloConnections</td>
 <td>Yes</td>
 <td></td>
@@ -701,6 +630,10 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -745,7 +678,7 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_ACQUIRING_ACCESS, AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
@@ -754,7 +687,7 @@ You must replace <code>ALO AUTHENTICATION KEY</code> with your AUTHENTICATION ke
 </tbody></table></p>
 
 <aside class="notice">
-After you call the <code>connect()</code> method the Audio Service will start dispatching events that you should add event listeners for&#46;
+After you call the <code>connect(channel)</code> method the Audio Service will start dispatching events that you should add event listeners for&#46;
 See <a href="#audio-sdk-handling-events">Handling Events</a> for more information about the types of events that are available.
 </aside>
 <h2 id='audio-sdk-disconnecting-from-the-audio-service'>Disconnecting from the Audio Service</h2>
@@ -793,15 +726,81 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
 <td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
 </tr>
 </tbody></table></p>
-<h2 id='audio-sdk-join-a-channel'>Join a Channel</h2>
-<p>(NOT YET IMPLEMENTED) but can use changeChannel.  TODO: we should probably change the the changeChannel method name to something that conveys that it means &quot;change or join&quot;</p>
-<h2 id='audio-sdk-change-channel'>Change Channel</h2>
+<h2 id='audio-sdk-connect-to-a-channel'>Connect to a Channel</h2>
 <blockquote>
-<p>Sample Channel Change.</p>
+<p>Sample Channel Connect.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloAudio</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
 </code></pre></div>
-<p>To change the audio channel you invoke the <code>changeChannel()</code> method.</p>
+<p>To connect to an audio service channel you call the <code>connect(channel)</code> method:</p>
+
+<p><code>aloAudio.connect(channel);</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>channel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#audio-sdk-connect-to-a-channel-channel-object">channel</a> object defining which channel to join upon connection to the service.</td>
+</tr>
+</tbody></table>
+
+<h3 id='audio-sdk-connect-to-a-channel-channel-object'>Channel Object</h3>
+
+<p>TODO: create a Channel object class</p>
+
+<p>The current channel object defines the audio channel that the user is currently participating in.</p>
+
+<blockquote>
+<p>Sample Channel Object.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">isIntercom</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+<tr>
+<td>isIntercom</td>
+<td>No</td>
+<td>false</td>
+<td>If true this is a full duplex channel.  Otherwise it is a PTT channel.  TODO: do we want to use the word &quot;intercom&quot; ?</td>
+</tr>
+<tr>
+<td>bcp47Language</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+<tr>
+<td>bcp47LanguageTag</td>
+<td>No</td>
+<td></td>
+<td>(TODO: need better naming and list of language codes) Language code used for TTS</td>
+</tr>
+</tbody></table>
 
 <blockquote>
 <p>Example onJoinChannel event payloads</p>
@@ -828,7 +827,7 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-connect-related-events'>Channel Connect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -845,14 +844,19 @@ See <a href="#audio-sdk-handling-events">Handling Events</a> for more informatio
 After joining a room there are events dispatched about the availablilty of PTT and the Full Duplex microphone&#46;
 See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-sdk-full-duplex">Full Duplex</a> for more information.
 </aside>
+
 <h2 id='audio-sdk-leave-channel'>Leave Channel</h2>
+
 <p>(NOT YET IMPLEMENTED)</p>
+
 <h2 id='audio-sdk-push-to-talk-ptt'>Push To Talk (PTT)</h2>
+
 <p>TODO: Explain what PTT is - and what &quot;locking (mutex)&quot; means.</p>
 
 <blockquote>
 <p>Example onPTTStateChange events payloads</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="err">state:</span><span class="w"> </span><span class="s2">"PTT_BUTTON_STATE_AVAILABLE"</span><span class="w">
@@ -865,9 +869,11 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+
 <blockquote>
 <p>Example events received when pressing the PTT button.</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">onPTTLockChange</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -890,9 +896,11 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+
 <blockquote>
 <p>Example events received when releasing the PTT button.</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">onPTTLockChange</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -915,6 +923,7 @@ See <a href="#audio-sdk-push-to-talk-ptt">Push To Talk</a> and <a href="#audio-s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+
 <h3 id='presence-sdk-ptt-related-events'>PTT Related Events</h3>
 
 <table><thead>
@@ -1182,6 +1191,10 @@ The event object may contain additional information about the event in <code>eve
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -1225,7 +1238,7 @@ The event object may contain additional information about the event in <code>eve
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_ACQUIRING_ACCESS, AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
@@ -1287,7 +1300,7 @@ The event object may contain additional information about the event in <code>eve
     </span><span class="err">channel:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='presence-sdk-channel-joining-related-events'>Channel Joining Related Events</h3>
+</span></code></pre></div><h3 id='presence-sdk-channel-connect-related-events'>Channel Connect Related Events</h3>
 <table><thead>
 <tr>
 <th>Event</th>
@@ -1447,17 +1460,13 @@ The event object may contain additional information about the event in <code>eve
 
 <p>TODO: will we also have a CDN version of the SDK?</p>
 
-<h2 id='video-sdk-connecting-to-the-video-service'>Connecting to the Video Service</h2>
+<h2 id='video-sdk-instantiating-the-video-service-object'>Instantiating the Video Service Object</h2>
 
 <p>In order to instantiate the AloVideo object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
 
 <p><code>aloVideo = new AloVideo(props);</code></p>
 
-<p>To connect to the video service you call the <code>connect()</code> method:</p>
-
-<p><code>aloVideo.connect();</code></p>
-
-<h3 id='video-sdk-connecting-to-the-video-service-user-object'>User Object</h3>
+<h3 id='video-sdk-instantiating-the-video-service-object-user-object'>User Object</h3>
 
 <p>TODO: create a User object class (maybe call it Participant instead)</p>
 
@@ -1498,59 +1507,20 @@ The event object may contain additional information about the event in <code>eve
 </tr>
 </tbody></table>
 
-<h3 id='video-sdk-connecting-to-the-video-service-current-channel-object'>Current Channel Object</h3>
-
-<p>TODO: create a Channel object class</p>
-
-<p>The current channel object defines the video channel that the user is currently participating in.</p>
-
-<blockquote>
-<p>Sample Current Channel Object.</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Yes</td>
-<td></td>
-<td>Unique alphanumeric channel identifier</td>
-</tr>
-</tbody></table>
-
-<h3 id='video-sdk-connecting-to-the-video-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToVideo</span><span class="p">()</span> <span class="p">{</span>
+<h3 id='video-sdk-instantiating-the-video-service-object-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToVideo</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="na">videoUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
-      <span class="na">videoRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
     <span class="p">};</span>
-    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
-    <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
-      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span>
     <span class="p">};</span>
     <span class="nx">aloVideo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloVideo</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-    <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
     <span class="nx">initializeEventListeners</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1599,12 +1569,6 @@ The event object may contain additional information about the event in <code>eve
 <td>The <a href="#video-sdk-connecting-to-the-video-service-user-object">user</a> object that defines the current user</td>
 </tr>
 <tr>
-<td>currentChannel</td>
-<td>No</td>
-<td></td>
-<td>The <a href="#video-sdk-connecting-to-the-video-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the video service but will not immediately join a channel.</td>
-</tr>
-<tr>
 <td>aloConnections</td>
 <td>Yes</td>
 <td></td>
@@ -1623,6 +1587,10 @@ The event object may contain additional information about the event in <code>eve
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -1667,7 +1635,7 @@ The event object may contain additional information about the event in <code>eve
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_ACQUIRING_ACCESS, AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
@@ -1715,13 +1683,13 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
 </tr>
 </tbody></table></p>
-<h2 id='video-sdk-change-channel'>Change Channel</h2>
+<h2 id='video-sdk-connect-channel'>Connect Channel</h2>
 <blockquote>
-<p>Sample Channel Change.</p>
+<p>Sample Channel Connect.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
 </code></pre></div>
-<p>To change the video channel you invoke the <code>changeChannel()</code> method.</p>
+<p>To connect to video channel you invoke the <code>connect(channel)</code> method.</p>
 
 <blockquote>
 <p>Example onJoinChannel event payloads</p>
@@ -1760,10 +1728,60 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CHANNEL_STATUS_JOINING, AloVideo.CHANNEL_STATUS_JOINED, AloVideo.STATUS_FAILED.</td>
 </tr>
 </tbody></table></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>channel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#video-sdk-connect-channel-channel-object">channel</a> object defining which channel to join upon connection to the service.</td>
+</tr>
+</tbody></table>
+
+<h3 id='video-sdk-connect-channel-channel-object'>Channel Object</h3>
+
+<p>TODO: create a Channel object class</p>
+
+<p>The channel object defines the video channel that the user is currently participating in.</p>
+
+<blockquote>
+<p>Sample Channel Object.</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+</tbody></table>
+
 <h2 id='video-sdk-input-device-selection'>Input Device Selection</h2>
+
 <blockquote>
 <p>Example device list retrieval</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">getMediaList</span><span class="p">();</span>
 <span class="kd">const</span> <span class="nx">listElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select#availableCameras</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">listElement</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
@@ -1776,6 +1794,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
   <span class="nx">listElement</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">inputOption</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <p>Before joining a video channel you have the option of selecting which video input device (camera) to use.  If you do not specify an input device the operating system&#39;s default device will be used.</p>
 
 <p>In order to get the current list of available video devices you can use the <code>getMediaList()</code> method.</p>
@@ -1785,6 +1804,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <blockquote>
 <p>Example onDeviceListUpdate event payload</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="err">detail</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="mi">99</span><span class="err">ee</span><span class="mi">472997</span><span class="err">a</span><span class="mi">484234</span><span class="err">acd</span><span class="mi">080</span><span class="err">b</span><span class="mi">1153</span><span class="err">c</span><span class="mi">88</span><span class="err">bd</span><span class="mi">3</span><span class="err">a</span><span class="mi">80</span><span class="err">dba</span><span class="mi">716179</span><span class="err">a</span><span class="mi">0</span><span class="err">c</span><span class="mi">90</span><span class="err">af</span><span class="mi">1</span><span class="err">c</span><span class="mi">60</span><span class="err">de</span><span class="mi">83685</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1800,6 +1820,7 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
   }
 }
 </span></code></pre></div>
+
 <h3 id='audio-sdk-handling-events-input-device-related-events'>Input Device Related Events</h3>
 
 <table><thead>
@@ -2034,6 +2055,10 @@ The event object may contain additional information about the event in <code>eve
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -2077,7 +2102,7 @@ The event object may contain additional information about the event in <code>eve
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_ACQUIRING_ACCESS, AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>

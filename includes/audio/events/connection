@@ -2,6 +2,10 @@
 <p>Example onConnectionChange event payloads</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">"ACQUIRING_ACCESS"</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">"CONNECTING"</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -45,7 +49,7 @@
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Audio Service is established events showing the following statuses will be dispatched: AloAudio.CONNECTION_STATUS_ACQUIRING_ACCESS, AloAudio.CONNECTION_STATUS_CONNECTING, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.STATUS_NOT_CONNECTED, AloAudio.CONNECTION_STATUS_ERROR, AloAudio.CONNECTION_STATUS_CONNECTED, AloAudio.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>

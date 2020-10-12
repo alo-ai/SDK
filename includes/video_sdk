@@ -13,15 +13,11 @@
 <p><code>npm install --save alo-video-js</code></p>
 
 <p>TODO: will we also have a CDN version of the SDK?</p>
-<h2 id='video-sdk-connecting-to-the-video-service'>Connecting to the Video Service</h2>
+<h2 id='video-sdk-instantiating-the-video-service-object'>Instantiating the Video Service Object</h2>
 <p>In order to instantiate the AloVideo object you are required to provide a number of properties. Once you have defined the properties you instantiate as shown:</p>
 
 <p><code>aloVideo = new AloVideo(props);</code></p>
-
-<p>To connect to the video service you call the <code>connect()</code> method:</p>
-
-<p><code>aloVideo.connect();</code></p>
-<h3 id='video-sdk-connecting-to-the-video-service-user-object'>User Object</h3>
+<h3 id='video-sdk-instantiating-the-video-service-object-user-object'>User Object</h3>
 <p>TODO: create a User object class (maybe call it Participant instead)</p>
 
 <p>The user object defines the user that will be participating in the video channels.</p>
@@ -58,55 +54,20 @@
 <td>Unique device identifier.  If not provided a random id will be generated.</td>
 </tr>
 </tbody></table>
-<h3 id='video-sdk-connecting-to-the-video-service-current-channel-object'>Current Channel Object</h3>
-<p>TODO: create a Channel object class</p>
-
-<p>The current channel object defines the video channel that the user is currently participating in.</p>
-
-<blockquote>
-<p>Sample Current Channel Object.</p>
-</blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
-<span class="p">}</span>
-</code></pre></div>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Yes</td>
-<td></td>
-<td>Unique alphanumeric channel identifier</td>
-</tr>
-</tbody></table>
-<h3 id='video-sdk-connecting-to-the-video-service-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToVideo</span><span class="p">()</span> <span class="p">{</span>
+<h3 id='video-sdk-instantiating-the-video-service-object-instantiation-properties'>Instantiation Properties</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">connectToVideo</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">aloConnections</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="na">videoUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span><span class="p">,</span>
-      <span class="c1">// TODO: need a better name for this URL to get the user token</span>
-      <span class="na">videoRESTUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BT ALO&gt;</span><span class="dl">'</span>
+      <span class="na">mutexUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;PROVIDED BY ĀLO&gt;</span><span class="dl">'</span>
     <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">James Jones</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">deviceId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abcd-efsg-wqer-qewe</span><span class="dl">"</span>
     <span class="p">};</span>
-    <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">myChannelId</span><span class="dl">"</span>
-    <span class="p">};</span>
     <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">user</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
-      <span class="na">currentChannel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">aloConnections</span><span class="p">:</span> <span class="nx">aloConnections</span>
     <span class="p">};</span>
     <span class="nx">aloVideo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AloVideo</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-    <span class="nx">aloVideo</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
     <span class="nx">initializeEventListeners</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -155,12 +116,6 @@
 <td>The <a href="#video-sdk-connecting-to-the-video-service-user-object">user</a> object that defines the current user</td>
 </tr>
 <tr>
-<td>currentChannel</td>
-<td>No</td>
-<td></td>
-<td>The <a href="#video-sdk-connecting-to-the-video-service-current-channel-object">current channel</a> object defining which channel to join upon connection to the service.  If no channel is provided the user will connect to the video service but will not immediately join a channel.</td>
-</tr>
-<tr>
 <td>aloConnections</td>
 <td>Yes</td>
 <td></td>
@@ -179,6 +134,10 @@
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -222,7 +181,7 @@
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_ACQUIRING_ACCESS, AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
@@ -270,13 +229,13 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>Once disconnected, either intentionally or due to an error, the onDisconnect event will be dispatched.</td>
 </tr>
 </tbody></table></p>
-<h2 id='video-sdk-change-channel'>Change Channel</h2>
+<h2 id='video-sdk-connect-channel'>Connect Channel</h2>
 <blockquote>
-<p>Sample Channel Change.</p>
+<p>Sample Channel Connect.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">changeChannel</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">aloVideo</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myChannelId</span><span class="dl">'</span><span class="p">});</span>
 </code></pre></div>
-<p>To change the video channel you invoke the <code>changeChannel()</code> method.</p>
+<p>To connect to video channel you invoke the <code>connect(channel)</code> method.</p>
 
 <blockquote>
 <p>Example onJoinChannel event payloads</p>
@@ -315,6 +274,49 @@ See <a href="#video-sdk-handling-events">Handling Events</a> for more informatio
 <td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CHANNEL_STATUS_JOINING, AloVideo.CHANNEL_STATUS_JOINED, AloVideo.STATUS_FAILED.</td>
 </tr>
 </tbody></table></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>channel</td>
+<td>No</td>
+<td></td>
+<td>The <a href="#video-sdk-connect-channel-channel-object">channel</a> object defining which channel to join upon connection to the service.</td>
+</tr>
+</tbody></table>
+<h3 id='video-sdk-connect-channel-channel-object'>Channel Object</h3>
+<p>TODO: create a Channel object class</p>
+
+<p>The channel object defines the video channel that the user is currently participating in.</p>
+
+<blockquote>
+<p>Sample Channel Object.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">currentChannel</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unique id for the channel</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Yes</td>
+<td></td>
+<td>Unique alphanumeric channel identifier</td>
+</tr>
+</tbody></table>
 <h2 id='video-sdk-input-device-selection'>Input Device Selection</h2>
 <blockquote>
 <p>Example device list retrieval</p>
@@ -561,6 +563,10 @@ The event object may contain additional information about the event in <code>eve
 </blockquote>
 
 <p><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;ACQUIRING_ACCESS&quot;</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"></p>
+
+<p></span><span class="p">{</span><span class="w">
  </span><span class="err">detail:</span><span class="w"> </span><span class="p">{</span><span class="err">state:</span><span class="w"> </span><span class="s2">&quot;CONNECTING&quot;</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"></p>
 
@@ -604,7 +610,7 @@ The event object may contain additional information about the event in <code>eve
 </thead><tbody>
 <tr>
 <td>onConnectionChange</td>
-<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
+<td>As the connection to the Video Service is established events showing the following statuses will be dispatched: AloVideo.CONNECTION_STATUS_ACQUIRING_ACCESS, AloVideo.CONNECTION_STATUS_CONNECTING, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.STATUS_NOT_CONNECTED, AloVideo.CONNECTION_STATUS_ERROR, AloVideo.CONNECTION_STATUS_CONNECTED, AloVideo.CONNECTION_STATUS_RECONNECT_PENDING.</td>
 </tr>
 <tr>
 <td>onDisconnect</td>
